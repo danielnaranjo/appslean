@@ -1,0 +1,106 @@
+<div class="row hidden-xs">
+  <div class="col-md-12 line">
+    <div class="row">
+      <div class="col-md-11 col-sm-10">Account > Sign in</div>
+      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-controller="LoginCtrl" ng-click="logout();" class="logout">Logout</a></div>
+    </div>
+  </div>
+</div>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 hidden-xs">
+    	<menu></menu>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row" ng-controller="MainCtrl">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        	<tabset>
+			 <tab heading="Attorney list" ng-controller="LawyersCtrl">
+	          <table class="table table-striped table-hover" style="padding:20px 20px 20px 0;">
+	            <thead>
+	              <tr>
+	                <td><strong>Lawyers</strong></td>
+	                <td><strong>E-mail</strong></td>
+	                <td><strong>Type of compensation</strong></td>
+	              </tr>
+	            </thead>
+	            <tbody>
+	              <tr ng-repeat="d in lawyers.data">
+	                <td>{{d.name}} {{d.middle}} {{d.lastname}}</td>
+	                <td><a href="mailto:{{d.email}}">{{d.email}}</a></td>
+	                <td>{{d.type}}</td>
+	              </tr>
+	              <tr ng-hide="lawyers.data">
+	                <td colspan="3">Loading data..</td>
+	              </tr>
+	            </tbody>
+	          </table>
+	          <!-- <p class="text-center">
+	            <button class="btn btn-default">Previous</button>
+	            <button class="btn btn-default">Next</button>
+	          </p> -->
+	      	</tab> 
+	      	<tab heading="New attorney">
+	      		<form class="form" role="form"style="padding:20px 20px 20px 0;" >
+	      			<div class="row">
+	      				<div class="col-md-4 col-sm-4 col-xs-4">
+	      					<input type="text" class="form-control" placeholder="Employee #" name="number" ng-model="lawyer.number">
+	      				</div>
+	      				<div class="col-md-4 col-sm-4 col-xs-4">
+	      					<input type="text" class="form-control" placeholder="1099" name="contribution" ng-model="lawyer.contribution">
+	      				</div>
+	      				<div class="col-md-4 col-sm-4 col-xs-4">
+	      					<input type="text" class="form-control" placeholder="W2" name="w2" ng-model="lawyer.w2">
+	      				</div>
+	      			</div>
+	      			<hr>
+	      			<div class="form-group">
+	      				<input type="text" class="form-control" placeholder="First Name" name="fname" ng-model="lawyer.fname">
+	      			</div>
+	      			<div class="form-group">
+	      				<input type="text" class="form-control" placeholder="Last Name" name="lname" ng-model="lawyer.lname">
+	      			</div>
+	      			<div class="form-group">
+	      				<input type="email" class="form-control" placeholder="yourname@company.com" name="email" ng-model="lawyer.email">
+	      			</div>
+	      			<div class="row" style="margin-bottom:15px;">
+	      				<div class="col-md-9 col-sm-9 col-xs-12">
+	      					<input type="text" class="form-control" placeholder="Address" name="address" ng-model="lawyer.address">
+	      				</div>
+	      				<div class="col-md-3 col-sm-3 col-xs-12">
+	      					<input type="text" class="form-control" placeholder="Zip Code" name="zipcode" ng-model="lawyer.zipcode">
+	      				</div>
+	      			</div>
+	      			<div class="row">
+	      				<div class="col-md-6">
+	      					<input type="text" class="form-control" placeholder="(704) 555-1234" name="phone" ng-model="lawyer.phone">
+	      				</div>
+	      				<div class="col-md-6">
+	      					<input type="text" class="form-control" placeholder="(980) 555-1234" name="mobile" ng-model="lawyer.mobile">
+	      				</div>
+	      			</div>
+	      			<hr>
+	      			<div class="form-group">
+	      				<select class="form-control" placeholder="Type" name="type" ng-model="lawyer.type">
+	      					<option value="">Choose type of profile</option>
+	      					<option value="">NETK</option>
+	      					<option value="">NETK</option>
+	      					<option value="">NETK</option>
+	      				</select>
+	      			</div>
+	      			<hr>
+	      			<div class="form-group">
+	      				<input type="number" class="form-control" placeholder="SSN #000-0000-000" name="ssn" ng-model="lawyer.ssn">
+	      			</div>
+	      			<hr>
+	      			<p>
+	      				<button type="submit" class="btn btn-info">Add new laywer</button>
+	      			</p>
+	      		</form>
+	      	</tab>
+	      </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

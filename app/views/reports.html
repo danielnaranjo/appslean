@@ -1,0 +1,133 @@
+<div class="row hidden-xs">
+  <div class="col-md-12 line">
+    <div class="row">
+      <div class="col-md-11 col-sm-10">Account > Reports</div>
+      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-controller="LoginCtrl" ng-click="logout();" class="logout">Logout</a></div>
+    </div>
+  </div>
+</div>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 hidden-xs">
+    	<menu></menu>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+        <div class="col-md-12">
+		  <tabset>
+			<tab heading="Daily collect" style="margin:0;padding:0;">
+	          <table class="table table-striped table-hover">
+	            <thead>
+	              <tr>
+	                <td><strong>Split Lawyer 1</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	                <td><strong>Split Lawyer 2</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	                <td><strong>Split Extra</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	              </tr>
+	            </thead>
+	            <tbody>
+	              <tr ng-repeat="i in [1,2,3,4,5,6,7,8]">
+	                <td>BM</td>
+	                <td>Ref </td>
+	                <td>{{i+'000'|currency}}</td>
+	                <td> </td>
+	                <td></td>
+	                <td></td>
+	                <td></td>
+	                <td>Ops</td>
+	                <td>{{i+'00'|currency}}</td>
+	              </tr>
+	            </tbody>
+	          </table>
+			</tab>
+			<tab heading="Attorney" style="margin:0;padding:0;">
+	          <table class="table table-striped table-hover">
+	            <thead>
+	              <tr>
+	                <td><strong>Date</strong></td>
+	                <td><strong>Company/client</strong></td>
+	                <td><strong>File #</strong></td>
+	                <td><strong>Amount Deposit</strong></td>
+	                <td><strong>Payment Method</strong></td>
+	              </tr>
+	            </thead>
+	            <tbody>
+	              <tr ng-repeat="i in [1,2,3,4,5,6,7,8]">
+	                <td>{{'2/6/2015'}}</td>
+	                <td><a href="#">Caja Holdings</a></td>
+	                <td>538-2015-SS-00001</td>
+	                <td>{{'10000'|currency}}</td>
+	                <td>Check</td>
+	              </tr>
+	            </tbody>
+	            <tfooter>
+	            	<tr>
+	            		<td></td>
+	            		<td>Total</td>
+	            		<td>Num. of Referrals</td>
+	            		<td>4</td>
+	            	</tr>
+	            	<tr>
+	            		<td></td>
+	            		<td></td>
+	            		<td>Num. of Accounts</td>
+	            		<td>4</td>
+	            	</tr>
+	            	<tr>
+	            		<td></td>
+	            		<td></td>
+	            		<td>Splits and Contributions</td>
+	            		<td>{{'40000'|currency}} / 50%</td>
+	            	</tr>
+	            	<tr>
+	            	<tr>
+	            		<td></td>
+	            		<td></td>
+	            		<td>Attorney's total collected fee</td>
+	            		<td>{{'50000'|currency}} / 50%</td>
+	            	</tr>
+	            	</tr>
+	            </tfooter>
+	          </table>
+	      	</tab> 
+			<tab heading="Split" style="margin:0;padding:0;">
+	          <table class="table table-striped table-hover">
+	            <thead>
+	              <tr>
+	                <td><strong>Split Lawyer 1</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	                <td><strong>Split Lawyer 2</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	                <td><strong>Split Extra</strong></td>
+	                <td><strong>Split Type</strong></td>
+	                <td><strong>Split Amount</strong></td>
+	              </tr>
+	            </thead>
+	            <tbody>
+	              <tr ng-repeat="i in [1,2,3,4,5,6,7,8]">
+	                <td>BM</td>
+	                <td>Ref </td>
+	                <td>{{i+'000'|currency}}</td>
+	                <td> </td>
+	                <td></td>
+	                <td></td>
+	                <td></td>
+	                <td>Ops</td>
+	                <td>{{i+'00'|currency}}</td>
+	              </tr>
+	            </tbody>
+	          </table>
+			</tab> <!-- SJ -->
+		  </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
