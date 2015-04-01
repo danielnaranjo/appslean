@@ -7,8 +7,7 @@
  * # MenuCtrl
  * Controller of the calculatorApp
  */
-angular.module('calculatorApp')
-  .controller('MenuCtrl', function($scope) {
+app.controller('MenuCtrl', function($scope) {
     $scope.name='Daniel N.';
     $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
 

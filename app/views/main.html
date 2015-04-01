@@ -22,7 +22,7 @@
           <div google-chart chart="chart2" style="padding:20px;width:100%"/>
         </div>
       </div>
-      <div class="row">
+      <div class="row" ng-controller="LawyersCtrl">
         <div class="col-md-12">
           <table class="table table-striped table-hover">
             <thead>
@@ -34,12 +34,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="d in data">
-                <td>{{d.name}}</td>
+              <tr ng-repeat="d in lawyers.data | limitTo:5">
+                <td>{{d.name}} {{d.middle}} {{d.lastname}}</td>
                 <td><a href="mailto:{{d.email}}">{{d.email}}</a></td>
                 <td>{{d.type}}</td>
                 <td>{{d.date}}</td>
               </tr>
+                <tr ng-hide="lawyers.data">
+                  <td colspan="3">Loading data..</td>
+                </tr>
             </tbody>
           </table>
           <p class="text-center">

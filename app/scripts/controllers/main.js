@@ -9,14 +9,14 @@
  */
 app.controller('MainCtrl', function ($scope, $http, Data) {
   
-var chart2 = {};
-    chart2.type = "PieChart";
+    var chart2 = {};
+    chart2.type = 'PieChart';
     chart2.data = [
-       ['Component', 'cost'],
-       ['Brandy Milazzo', 50000],
-       ['Suzanne Schaffer', 80000],
-       ['Daniella Webb',20000]
-      ];
+        ['Component', 'cost'],
+        ['Brandy Milazzo', 50000],
+        ['Suzanne Schaffer', 80000],
+        ['Daniella Webb',20000]
+    ];
     // chart2.data.push(['Services',20000]);
     chart2.options = {
         displayExactValues: true,

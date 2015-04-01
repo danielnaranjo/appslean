@@ -17,6 +17,7 @@ app.controller('LawyersCtrl', function ($scope, $http) {
 	})
 	.success(function(data){
 		$scope.lawyers=data;
+		console.log('Loading lawyers\' data, please hold on.. Hello '+data.data[0].name);
 	})
 	.error(function(){
 		console.log('Error API');
