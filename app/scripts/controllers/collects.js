@@ -7,7 +7,7 @@
  * # CollectsCtrl
  * Controller of the calculatorApp
  */
-app.controller('CollectsCtrl', function ($scope, $http, Data) {
+app.controller('CollectsCtrl', function ($scope, $http, Data, toaster) {
 
 	var d = new Date();
 	var n = d.getTime();
@@ -25,7 +25,6 @@ app.controller('CollectsCtrl', function ($scope, $http, Data) {
 	.success(function(data){ $scope.payments=data; })
 	.error(function(){ console.log('Error API payments'); });
 
-
 	$scope.collects = {};
     $scope.processSend = function() {
 		$http({
@@ -35,16 +34,10 @@ app.controller('CollectsCtrl', function ($scope, $http, Data) {
 			headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
 		})        
 		.success(function(data) {
-            console.log(data);
-            if (!data.success) {
-            	// if not successful, bind errors to error variables
-            	Data.toast(message);
-            	console.log('No OK:'+JSON.stringify(message));
-            } else {
-            	// if successful, bind success message to message
-                Data.toast(message);
-                console.log('OK:'+JSON.stringify(message));
-            }
+            toaster.pop(data.status, "", data.message, 10000, 'trustedHtml');
+            $scope.collects = {};
+        }).error(function(data){
+        	 toaster.pop('error', "", 'Something wrong', 10000, 'trustedHtml');
         });
 	};
 

@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 var app = angular.module('calculatorApp', [
     'ngCookies',
     'ngResource',
@@ -50,12 +51,16 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/collects.html',
         controller: 'CollectsCtrl'
       })
+      .when('/report/:uid', {
+        templateUrl: 'views/report.html',
+        controller: 'ReportCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
   });
 // app.run(function($rootScope, $location, Data) {
-//   $rootScope.$on("$routeChangeStart",function (event, next, current){
+//   $rootScope.$on('$routeChangeStart',function (event, next, current){
 //     $rootScope.authenticated = false;
 //     Data.get('session').then(function (results) {
 //       if (results.uid) {
@@ -65,10 +70,10 @@ app.config(function ($routeProvider) {
 //         $rootScope.email = results.email;
 //       } else {
 //         var nextUrl = next.$$route.originalPath;
-//         if (nextUrl == '/signup' || nextUrl == '/login') {
+//         if (nextUrl === '/signup' || nextUrl === '/login') {
 //           // none behavior
 //         } else {
-//           $location.path("/main");
+//           $location.path('/main');
 //         }
 //       }
 //     });

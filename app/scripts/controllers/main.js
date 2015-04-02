@@ -7,37 +7,53 @@
  * # MainCtrl
  * Controller of the calculatorApp
  */
-app.controller('MainCtrl', function ($scope, $http, Data) {
+app.controller('MainCtrl', function ($scope, $http, $location, $window, Data) {
+    $scope.goto = function (link) {
+        $window.location.href = '#/'+link;
+        console.log(link);
+    };
+    // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/charts/1' })
+    // .success(function(data){ $scope.chart1=data; })
+    // .error(function(){ console.log('Error API chart1'); });
+    $http({ 
+        method: 'GET', 
+        url: 'http://apps-lean.com/api/v1/charts/2'
+    })
+    .success(function(data){
+        console.log(data.data);
+        //
+        var chart2 = {};
+        chart2.type = 'PieChart';
+        chart2.data = [
+            ['Component','cost'],
+            ['Brandy Milazzo',50000],
+            ['Suzanne Schaffer',80000],
+            ['Daniella Webb',20000]
+        ];
+        //$scope.chart2=data.data;
+        chart2.options = {
+            displayExactValues: true,
+            width: 350,
+            height: 200,
+            is3D: false,
+            chartArea: {left:10,top:10,bottom:0,height:"100%"}
+        };
+        chart2.formatters = {
+          number : [{
+            columnNum: 1,
+            pattern: "$ #,##0.00"
+          }]
+        };
+        $scope.chart2 = chart2;
+        $scope.aa=1*$scope.chart2.data[1][1];
+        $scope.bb=1*$scope.chart2.data[2][1];
+        $scope.cc=1*$scope.chart2.data[3][1];
+        // 
+    })
+    .error(function(){
+        console.log('Error API chart2');
+    });
   
-    var chart2 = {};
-    chart2.type = 'PieChart';
-    chart2.data = [
-        ['Component', 'cost'],
-        ['Brandy Milazzo', 50000],
-        ['Suzanne Schaffer', 80000],
-        ['Daniella Webb',20000]
-    ];
-    // chart2.data.push(['Services',20000]);
-    chart2.options = {
-        displayExactValues: true,
-        width: 350,
-        height: 200,
-        is3D: true,
-        chartArea: {left:10,top:10,bottom:0,height:"100%"}
-    };
-
-    chart2.formatters = {
-      number : [{
-        columnNum: 1,
-        pattern: "$ #,##0.00"
-      }]
-    };
-
-    $scope.chart2 = chart2;
-
-    $scope.aa=1*$scope.chart2.data[1][1];
-    $scope.bb=1*$scope.chart2.data[2][1];
-    $scope.cc=1*$scope.chart2.data[3][1];
   //
  var chart1 = {};
     chart1.type = "ColumnChart";
@@ -85,9 +101,7 @@ app.controller('MainCtrl', function ($scope, $http, Data) {
             "title": "Date"
         }
     };
-
     chart1.formatters = {};
-
     $scope.chart1 = chart1;
   //
   });

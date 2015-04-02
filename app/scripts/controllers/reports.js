@@ -9,17 +9,10 @@
  */
 app.controller('ReportsCtrl', function ($scope, Data, $http) {
 
-    // var x = new Date();
-    // $http({
-    //     method: 'GET',
-    //     url: 'http://apps-lean.com/api/v1/report/'+x
-    // })
-    // .success(function(data){
-    //     $scope.lawyers=data;
-    //     console.log($scope.lawyers);
-    // })
-    // .error(function(){
-    //     console.log('Error API');
-    // });
+    var d = new Date();
+    var n = d.getTime();
+    $http({ method:'GET',url:'http://apps-lean.com/api/v1/reports/'+n })
+    .success(function(data){ $scope.reports=data; })
+    .error(function(){ console.log('Error API lawyers'); });
 
   });

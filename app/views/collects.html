@@ -15,33 +15,33 @@
       <div class="row">
         <div class="col-md-12">
         	<form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="processSend()">
-      			<div class="form-group">
-      				<input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date">
-      			</div>
-      			<hr>
-      			<div class="row">
-      				<div class="col-md-6 col-sm-6 col-xs-12">
-      					<input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient">
-      				</div>
-      				<div class="col-md-6 col-sm-6 col-xs-12">
-      					<input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber">
-      				</div>
-      			</div>
-      			<hr>
-      			<div class="form-group" ng-controller="LawyersCtrl">
-      				<select class="form-control" name="lawyer" ng-model="collects.lawyer">
-      					<option value="">Choose one</option>
-      					<option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-                  <!-- {{d.name | limitTo:1 | uppercase}}{{d.lastname | limitTo:1 | uppercase}} -  -->
+            <div class="form-group" ng-controller="LawyersCtrl">
+              <select class="form-control" name="lawyer" ng-model="collects.lawyer" required>
+                <option value="">Choose an attorney</option>
+                <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
                   {{d.name | uppercase}} {{d.lastname | uppercase}}
                 </option>
-      				</select>
+              </select>
+            </div>
+            <hr>
+      			<div class="form-group">
+      				<input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date" required>
+      			</div>
+      			<div class="row">
+      				<div class="col-md-6 col-sm-6 col-xs-12">
+      					<input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient" required>
+      				</div>
+              <hr class="visible-xs">
+      				<div class="col-md-6 col-sm-6 col-xs-12">
+      					<input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber" required>
+      				</div>
+      			</div>
+      			<hr>
+      			<div class="form-group">
+      				<input type="text" class="form-control" placeholder="Amount deposit" name="amount" ng-model="collects.amount" required>
       			</div>
       			<div class="form-group">
-      				<input type="text" class="form-control" placeholder="Amount deposit" name="amount" ng-model="collects.amount">
-      			</div>
-      			<div class="form-group">
-      				<select class="form-control" name="payment" ng-model="collects.payment">
+      				<select class="form-control" name="payment" ng-model="collects.payment" required>
 	  					<option value="">Method of payment</option>
 	  					<option value="{{p.pID}}" ng-repeat="p in payments.data">{{p.payment}}</option>
 	  				</select> 
@@ -51,22 +51,22 @@
       			</div>
             <div class="form-group" ng-show="collects.addcommet">
               <hr>
-              <textarea class="form-control" placeholder="Comment here" name="comments" ng-model="collects.comments"></textarea>
+              <textarea class="form-control" placeholder="Comments here" name="comments" ng-model="collects.comments"></textarea>
               <hr>
             </div>
       			<p>
-      				<button type="submit" class="btn btn-success" ng-click="addCollect(collect)">
+      				<button type="submit" class="btn btn-success" ng-submit="processSend()">
       					Add collect
       				</button>
-              <button class="btn btn-primary disabled">
+              <button class="btn btn-primary disabled hidden-xs">
                 Save and continue
               </button>
-              <input type="checkbox" ng-model="collects.addcommet"> Add comment
-              <button class="btn btn-warning pull-right disabled">
+              <input type="checkbox" ng-model="collects.addcommet"> 
+              <span ng-hide="collects.addcommet">Add</span><span ng-show="collects.addcommet">Remove</span> comments
+              <button class="btn btn-warning pull-right disabled hidden-xs">
                 Load massive data
               </button>
       			</p>
-            {{collects}}
       		</form>
         </div>
       </div>

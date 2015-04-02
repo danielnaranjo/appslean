@@ -32,7 +32,7 @@ app.controller('MenuCtrl', function($scope) {
       },{
         name: 'Reports',
         url: 'reports'
-      },
+      }//,
       // {
       //   name: 'Settings',
       //   url: 'settings'

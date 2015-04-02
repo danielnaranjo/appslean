@@ -1,0 +1,30 @@
+<div class="row hidden-xs">
+  <div class="col-md-12 line">
+    <div class="row">
+      <div class="col-md-11 col-sm-10">Account > Report</div>
+      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-controller="LoginCtrl" ng-click="logout();" class="logout">Logout</a></div>
+    </div>
+  </div>
+</div>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 hidden-xs">
+      <menu></menu>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row" ng-controller="MainCtrl">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-7 col-sm-6 col-xs-12">
+              <h3 ng-hide="chart1">Loading charts</h3>
+              <div google-chart chart="chart1" style="padding:20px;width:100%"></div>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+              <h3 ng-hide="chart2">Loading charts</h3>
+              <div google-chart chart="chart2" style="padding:20px;width:100%"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
