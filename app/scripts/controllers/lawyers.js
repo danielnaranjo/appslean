@@ -7,7 +7,10 @@
  * # LawyersCtrl
  * Controller of the calculatorApp
  */
-app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster) {
+app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster, auth, $cookies) {
+
+	//devolvemos a la vista el nombre del usuario
+    $scope.username = $cookies.username;
 
 	var d = new Date();
 	var n = d.getTime();

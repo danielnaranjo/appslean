@@ -7,13 +7,13 @@
  * # MenuCtrl
  * Controller of the calculatorApp
  */
-app.controller('MenuCtrl', function($scope) {
-    $scope.name='Daniel N.';
-    $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
+app.controller('MenuCtrl', function($scope, $cookies, auth) {
+    // $scope.name='Daniel N.';
+    // $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
 
     $scope.menus = [{
-        name: 'Hi '+$scope.name,
-        url: 'main?uid='+$scope.uid
+        name: 'Dashboad',
+        url: 'main'
       },
       // {
       //   name: 'Clients',

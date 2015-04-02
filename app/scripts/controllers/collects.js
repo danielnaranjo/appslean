@@ -7,8 +7,10 @@
  * # CollectsCtrl
  * Controller of the calculatorApp
  */
-app.controller('CollectsCtrl', function ($scope, $http, Data, toaster) {
-
+app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies) {
+	//devolvemos a la vista el nombre del usuario
+    $scope.username = $cookies.username;
+    
 	var d = new Date();
 	var n = d.getTime();
 	$http({
@@ -34,10 +36,10 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster) {
 			headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
 		})        
 		.success(function(data) {
-            toaster.pop(data.status, "", data.message, 10000, 'trustedHtml');
+            toaster.pop(data.status, '', data.message, 10000, 'trustedHtml');
             $scope.collects = {};
         }).error(function(data){
-        	 toaster.pop('error', "", 'Something wrong', 10000, 'trustedHtml');
+        	 toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
         });
 	};
 

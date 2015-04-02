@@ -7,7 +7,10 @@
  * # ReportsCtrl
  * Controller of the calculatorApp
  */
-app.controller('ReportsCtrl', function ($scope, Data, $http) {
+app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
+
+	//devolvemos a la vista el nombre del usuario
+    $scope.username = $cookies.username;
 
     var d = new Date();
     var n = d.getTime();

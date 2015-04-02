@@ -1,8 +1,8 @@
 <div class="row hidden-xs">
   <div class="col-md-12 line">
     <div class="row">
-      <div class="col-md-11 col-sm-10">Account > Dasboard</div>
-      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-controller="LoginCtrl" ng-click="logout();" class="logout">Logout</a></div>
+      <div class="col-md-11 col-sm-10">Account > {{username}} > Dasboard</div>
+      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-href="#/logout" class="logout">Logout</a></div>
     </div>
   </div>
 </div>
@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="d in reports.data | limitTo:10">
+              <tr ng-repeat="d in reports.data | orderBy:date:reverse | limitTo:10">
                 <td class="capitalize">{{d.name}} {{d.lastname}}</td>
                 <td class="hidden-xs">{{d.nameclient}}</td>
                 <td class="hidden-xs">{{d.filenumber}}</td>

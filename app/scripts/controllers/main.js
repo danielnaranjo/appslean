@@ -7,11 +7,26 @@
  * # MainCtrl
  * Controller of the calculatorApp
  */
-app.controller('MainCtrl', function ($scope, $http, $location, $window, Data) {
-    $scope.goto = function (link) {
-        $window.location.href = '#/'+link;
-        console.log(link);
-    };
+app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $cookies, auth) {
+    // $scope.goto = function (link) {
+    //     $window.location.href = '#/'+link;
+    //     console.log(link);
+    // };
+
+    // $scope.login = function() {
+    //     auth.login($scope.username, $scope.password);
+    // }
+
+    //devolvemos a la vista el nombre del usuario
+    $scope.username = $cookies.username;
+    $scope.password = $cookies.password;
+    //la función logout que llamamos en la vista llama a la función
+    //logout de la factoria auth
+    // $scope.logout = function() {
+    //     auth.logout();
+    // }
+
+
     // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/charts/1' })
     // .success(function(data){ $scope.chart1=data; })
     // .error(function(){ console.log('Error API chart1'); });

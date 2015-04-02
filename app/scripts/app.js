@@ -28,7 +28,7 @@ app.config(function ($routeProvider) {
         controller: 'LoginCtrl'
       })
       .when('/logout', {
-        templateUrl: 'views/logout.html',
+        templateUrl: 'views/login.html',
         controller: 'LogoutCtrl'
       })
       .when('/signup', {
@@ -79,3 +79,11 @@ app.config(function ($routeProvider) {
 //     });
 //   });
 // });
+app.run(function($rootScope, auth) {
+  //al cambiar de rutas
+  $rootScope.$on('$routeChangeStart', function() {
+    //llamamos a checkStatus, el cual lo hemos definido en la factoria auth
+    //la cuál hemos inyectado en la acción run de la aplicación
+    auth.checkStatus();
+  });
+});
