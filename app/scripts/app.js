@@ -18,7 +18,8 @@ var app = angular.module('calculatorApp', [
     'googlechart',
     'toaster',
     'ngAnimate',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'firebase'
   ]);
 
 app.config(function ($routeProvider) {
@@ -54,6 +55,10 @@ app.config(function ($routeProvider) {
       .when('/report/:uid', {
         templateUrl: 'views/report.html',
         controller: 'ReportCtrl'
+      })
+      .when('/private', {
+        templateUrl: 'views/private.html',
+        controller: 'PrivateCtrl'
       })
       .otherwise({
         redirectTo: '/login'

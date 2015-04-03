@@ -21,16 +21,15 @@ app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $c
         var chart2 = {};
         chart2.type = 'PieChart';
         chart2.data = [['Component','cost']];
-        chart2.data.push(['Brandy Milazzo','200'],['Suzanne Schaffer','12500'],['colin stockton','4444'],['christa sumwalt','1'],['david boggs','500'],['steve horowitz','11001']);
+        chart2.data.push(['Brandy Milazzo',200],['Suzanne Schaffer',12500],['colin stockton',4444],['christa sumwalt',1],['david boggs',500],['steve horowitz',11001]);
 
-        var values = data;
-        var log =[];
-        angular.forEach(values, function(value, key) {
-          log.push(value);
-          //chart2.data.push(angular.fromJson(value[0]));
-          
-        });
-        console.log(log);
+        // var values = data;
+        // var log =[];
+        // angular.forEach(values, function(value, key) {
+          // log.push(value);
+          //chart2.data.push(angular.fromJson(value[0])); 
+        // });
+        // console.log(log);
         //console.log(chart2.data);
 
         //chart2.data.push(data);

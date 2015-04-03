@@ -32,10 +32,10 @@ app.controller('MenuCtrl', function($scope, $cookies, auth) {
       },{
         name: 'Reports',
         url: 'reports'
-      }//,
-      // {
-      //   name: 'Settings',
-      //   url: 'settings'
-      // }
+      },
+      {
+        name: 'Changelog',
+        url: 'private'
+      }
       ];
   });

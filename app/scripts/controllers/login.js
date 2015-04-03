@@ -25,6 +25,7 @@ app.controller('LoginCtrl', function ($scope, $location, $http, auth, Data, toas
             if(data.status==='success') {
                 toaster.pop(data.status, '', data.message, 5000, 'trustedHtml');
                 $cookies.username = data.name;
+                console.log(data.name);
                 auth.login($scope.username, $scope.password);
             } 
             if(data.status==='error') {
