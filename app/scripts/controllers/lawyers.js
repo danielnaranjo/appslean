@@ -9,18 +9,31 @@
  */
 app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster, auth, $cookies) {
 
-	//devolvemos a la vista el nombre del usuario
-    $scope.username = $cookies.username;
-
 	var d = new Date();
 	var n = d.getTime();
-	$http({ method: 'GET', url: 'http://apps-lean.com/api/v1/lawyers/'+n })
-	.success(function(data){ $scope.lawyers=data; })
-	.error(function(){ console.log('Error API lawyers'); });
+	$http({
+		method: 'GET',
+		url: 'http://apps-lean.com/api/v1/lawyers/'+n
+	})
+	.success(function(data){
+		$scope.lawyers=data;
+	})
+	.error(function(){
+		toaster.pop('error','','Cant complete this action, please try refresh', 2000,'trustedHtml');
+		console.log('Error API lawyers');
+	});
 
-	$http({ method: 'GET', url: 'http://apps-lean.com/api/v1/typeof/'+n })
-	.success(function(data){ $scope.equity=data; })
-	.error(function(){ console.log('Error API typeof'); });
+	$http({
+		method: 'GET',
+		url:'http://apps-lean.com/api/v1/typeof/'+n
+	})
+	.success(function(data){
+		$scope.equity=data;
+	})
+	.error(function(){
+		toaster.pop('error','','Cant complete this action, please try refresh', 2000, 'trustedHtml');
+		console.log('Error API typeof');
+	});
 	// addLawyer
 	$scope.lawyer = {};
     $scope.processSend = function() {

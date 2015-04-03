@@ -9,9 +9,6 @@
  */
 app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
 
-	//devolvemos a la vista el nombre del usuario
-    $scope.username = $cookies.username;
-
     var d = new Date();
     var n = d.getTime();
     $http({ method:'GET',url:'http://apps-lean.com/api/v1/reports/'+n })

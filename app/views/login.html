@@ -11,7 +11,6 @@
     	<div class="center-form panel">
 	      <div class="panel-body">
 	        <h2 class="text-center">Log in</h2>
-	        <!-- <form ng-submit="login()" name="loginForm"> -->
 	        <form name="loginUserForm" ng-submit="login()" method="post" >
 	          <div class="form-group has-feedback">
 	            <input class="form-control input-lg" type="email" name="email" ng-model="login.email" placeholder="E-mail" required autofocus>
@@ -20,8 +19,8 @@
 	          <div class="form-group has-feedback">
 	            <input class="form-control input-lg" type="password" name="password" ng-model="login.password" placeholder="Password" required>
 	            <span class="ion-key form-control-feedback"></span>
-	          </div><!-- ng-click="doLogin(login)"  -->
-	          <button type="submit" data-ng-disabled="loginUserForm.$invalid" class="btn btn-lg btn-block btn-success" ng-click="login(email)">Log in</button><!--  -->
+	          </div>
+	          <button type="submit" data-ng-disabled="loginUserForm.$invalid" class="btn btn-lg btn-block btn-success" ng-click="login(email)">Log in</button>
 	          <br/>
 	          <p class="text-center">
 	            <small>Don't have an account yet? <a href="/#/signup">Sign up</a></small>

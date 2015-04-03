@@ -14,7 +14,4 @@ app.controller('ReportCtrl', function ($scope, $http, Data, auth, $cookies) {
       'Karma'
     ];
 
-    //devolvemos a la vista el nombre del usuario
-    $scope.username = $cookies.username;
-
   });

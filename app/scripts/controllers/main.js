@@ -8,24 +8,6 @@
  * Controller of the calculatorApp
  */
 app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $cookies, auth) {
-    // $scope.goto = function (link) {
-    //     $window.location.href = '#/'+link;
-    //     console.log(link);
-    // };
-
-    // $scope.login = function() {
-    //     auth.login($scope.username, $scope.password);
-    // }
-
-    //devolvemos a la vista el nombre del usuario
-    $scope.username = $cookies.username;
-    $scope.password = $cookies.password;
-    //la función logout que llamamos en la vista llama a la función
-    //logout de la factoria auth
-    // $scope.logout = function() {
-    //     auth.logout();
-    // }
-
 
     // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/charts/1' })
     // .success(function(data){ $scope.chart1=data; })
@@ -35,16 +17,24 @@ app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $c
         url: 'http://apps-lean.com/api/v1/charts/2'
     })
     .success(function(data){
-        console.log(data.data);
-        //
+        //console.log(JSON.stringify(data));
         var chart2 = {};
         chart2.type = 'PieChart';
-        chart2.data = [
-            ['Component','cost'],
-            ['Brandy Milazzo',50000],
-            ['Suzanne Schaffer',80000],
-            ['Daniella Webb',20000]
-        ];
+        chart2.data = [['Component','cost']];
+        chart2.data.push(['Brandy Milazzo','200'],['Suzanne Schaffer','12500'],['colin stockton','4444'],['christa sumwalt','1'],['david boggs','500'],['steve horowitz','11001']);
+
+        var values = data;
+        var log =[];
+        angular.forEach(values, function(value, key) {
+          log.push(value);
+          //chart2.data.push(angular.fromJson(value[0]));
+          
+        });
+        console.log(log);
+        //console.log(chart2.data);
+
+        //chart2.data.push(data);
+        // chart2.data=JSON.stringify(data);
         //$scope.chart2=data.data;
         chart2.options = {
             displayExactValues: true,

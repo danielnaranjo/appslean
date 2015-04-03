@@ -59,27 +59,8 @@ app.config(function ($routeProvider) {
         redirectTo: '/login'
       });
   });
-// app.run(function($rootScope, $location, Data) {
-//   $rootScope.$on('$routeChangeStart',function (event, next, current){
-//     $rootScope.authenticated = false;
-//     Data.get('session').then(function (results) {
-//       if (results.uid) {
-//         $rootScope.authenticated = true;
-//         $rootScope.uid = results.uid;
-//         $rootScope.name = results.name;
-//         $rootScope.email = results.email;
-//       } else {
-//         var nextUrl = next.$$route.originalPath;
-//         if (nextUrl === '/signup' || nextUrl === '/login') {
-//           // none behavior
-//         } else {
-//           $location.path('/main');
-//         }
-//       }
-//     });
-//   });
-// });
 app.run(function($rootScope, auth) {
+  // based on http://uno-de-piera.com/login-con-angularjs-utilizando-cookies-con-el-modulo-ngcookies/
   //al cambiar de rutas
   $rootScope.$on('$routeChangeStart', function() {
     //llamamos a checkStatus, el cual lo hemos definido en la factoria auth

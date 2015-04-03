@@ -8,8 +8,6 @@
  * Controller of the calculatorApp
  */
 app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies) {
-	//devolvemos a la vista el nombre del usuario
-    $scope.username = $cookies.username;
     
 	var d = new Date();
 	var n = d.getTime();
