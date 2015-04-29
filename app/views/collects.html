@@ -18,19 +18,42 @@
             <div class="col-md-12">
               <h3>Attorney split report</h3>
                  <table class="table table-hover table-condensed" style="margin-top:10px;">
-                  <tr style="font-weight: bold">
-                    <td>Trust Acc.</td>
-                    <td style="width:130px">Company or person name</td>
-                    <td style="width:130px">File #</td>
-                    <td>Amount</td>
-                    <td>Split fees</td>
-                    <td>Splits / Lawyers</td>
-                    <td>Expenses</td>
-                    <td>Amounts</td>
-                    <td style="width:150px">Comments</td>
-                    <td></td>
-                  </tr>
-                  <tr ng-repeat="user in users">
+                  <thead>
+                    <tr style="font-weight: bold">
+                      <td style="width:100px">Trust Acc.</td>
+                      <td style="width:130px">Company or person name</td>
+                      <td style="width:130px">File #</td>
+                      <td>Amount</td>
+                      <td>Split fees</td>
+                      <td>Splits / Lawyers</td>
+                      <td>Expenses</td>
+                      <td>Amounts</td>
+                      <td style="width:150px">Comments</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="s in splits">
+                      <td>{{s.account}}</td>
+                      <td>{{s.name}}</td>
+                      <td>{{s.file}}</td>
+                      <td>{{s.amount|currency}}</td>
+                      <td style="border-left:5px solid #666" colspan="2">
+                        <table style="width:100%;">
+                          <tr ng-repeat="ss in s.split">
+                            <td style="width:50%;padding:0 0 10px 0;">{{ss.fee|currency}}</td>
+                            <td style="width:50%;padding:0 0 10px 0;">{{ss.lawyers}}</td>
+                          </tr>
+                        </table>
+                      </td>
+                      <!-- <td>{{s.lawyers}}</td> -->
+                      <td>{{s.expense}}</td>
+                      <td>{{s.fees|currency}}</td>
+                      <td>{{s.comments}}</td>
+                    </tr>
+                  </tbody>
+
+                  <!--
+                  <tr ng-repeat="user in users"  style="display:none;">
                     <td>
                       <span editable-select="user.account" e-name="account" onshow="loadAccounts()" e-form="rowform" e-ng-options="g.notes as g.notes for g in accounts"> {{ showAccounts(user) }} </span>
                     </td>
@@ -55,10 +78,10 @@
                       </span>
                     </td>
                     <td>
-                      <span editable-select="user.lawyers" e-name="lawyers" onshow="loadLawyers()" e-form="rowform" e-ng-options="g.uid as g.fullname for g in lawyers"> {{ showLawyers(user) }} </span> <!-- lawyers -->
+                      <span editable-select="user.lawyers" e-name="lawyers" onshow="loadLawyers()" e-form="rowform" e-ng-options="g.uid as g.fullname for g in lawyers"> {{ showLawyers(user) }} </span>
                     </td>
                     <td>
-                      <span editable-select="user.incomes" e-name="incomes" onshow="loadIncomes()" e-form="rowform" e-ng-options="g.eID as g.income for g in incomes"> {{ showExpenses(user) }} </span> <!-- expenses -->
+                      <span editable-select="user.incomes" e-name="incomes" onshow="loadIncomes()" e-form="rowform" e-ng-options="g.eID as g.income for g in incomes"> {{ showExpenses(user) }} </span>
                     </td>
                     <td>
                       <span editable-text="user.amount" e-name="amount" e-form="rowform" e-required>
@@ -71,7 +94,6 @@
                       </span>
                     </td>
                     <td style="white-space: nowrap">
-                      <!-- form -->
                       <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
                         <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-success">
                           <i class="fa fa-floppy-o"></i>
@@ -85,10 +107,9 @@
                         <button class="btn btn-danger" ng-click="removeUser($index)"><i class="fa fa-trash-o"></i></button>
                       </div>  
                     </td>
-                  </tr>
+                  </tr>-->
                 </table>
               <button class="btn btn-success" ng-click="addUser()">Add attorney report</button>
-              {{user}}
             </div>
           </div>
         </tab><!-- split -->
@@ -97,6 +118,116 @@
           <div class="row"><!--  style="display:none;" -->
             <div class="col-md-12">
               <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="processSend()">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <td style="width:30px">Date</td>
+                    <td>Client</td>
+                    <td>File #</td>
+                    <td>Lawyer</td>
+                    <td>Payment</td>
+                    <td ng-show="collects.payment==5">Ref.</td>
+                    <td>Deposited</td>
+                    <td>Trust Acc.</td>
+                    <td>Type of Income</td>
+                    <td ng-show="collects.addcommet">Comments</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date" required>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient" required>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber" required>
+                    </td>
+                    <td ng-controller="LawyersCtrl">
+                      <select class="form-control" name="lawyer" ng-model="collects.lawyer" required>
+                        <option value="">Attorney</option>
+                        <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+                          {{d.shortname}}
+                        </option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="form-control" name="payment" ng-model="collects.payment" required>
+                        <option value="">Method</option>
+                        <option value="{{p.pID}}" ng-repeat="p in payments.data">{{p.payment}}</option>
+                      </select>
+                    </td>
+                    <td ng-show="collects.payment==5">
+                      <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="collects.reference">
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" placeholder="ex. 1000" name="amount" ng-model="collects.amount" required>
+                    </td>
+                    <td>
+                      <select class="form-control" name="account" ng-model="collects.account" required>
+                      <option value="">Accounts</option>
+                      <option value="{{a.sID}}" ng-repeat="a in trusts.data">{{a.notes}}</option>
+                    </select>
+                    </td>
+                    <td>
+                      <input type="text" class="form-control" placeholder="Choose" name="type" ng-model="collects.type">
+                    </td>
+                    <td ng-show="collects.addcommet">
+                      <textarea class="form-control" placeholder="Notes" name="comments" ng-model="collects.comments"></textarea>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="9">
+                      <p>
+                        <button type="submit" class="btn btn-success" ng-submit="processSend()">
+                          Add collect
+                        </button>
+                        <button class="btn btn-primary disabled hidden-xs">
+                          Save and continue
+                        </button>
+                        <input type="checkbox" ng-model="collects.addcommet"> 
+                        <span ng-hide="collects.addcommet">Add</span><span ng-show="collects.addcommet">Remove</span> comments
+                        <button class="btn btn-warning pull-right disabled hidden-xs">
+                          Load massive data
+                        </button>
+                      </p>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+              </form>
+              <h3>Last 5 collects</h3>
+              <table class="table table-striped table-hover" ng-controller="ReportsCtrl">
+                <thead>
+                  <tr>
+                    <td><strong>Attorney</strong></td>
+                    <td class="hidden-xs"><strong>Company/Name</strong></td>
+                    <td><strong>File #</strong></td>
+                    <td><strong>Last collect</strong></td>
+                    <td><strong>Amount</strong></td>
+                    <td class="hidden-xs"><strong>Payment</strong></td>
+                    <td> </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="d in reports.data | limitTo:5">
+                    <td class="capitalize">{{d.name}} {{d.lastname}}</td>
+                    <td class="hidden-xs">{{d.nameclient}}</td>
+                    <td class="hidden-xs">{{d.filenumber}}</td>
+                    <td class="hidden-xs">{{d.payment}}</td>
+                    <td>{{d.amount|currency}}</td>
+                    <td>{{d.date|date}}</td>
+                    <td><a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a></td>
+                  </tr>
+                    <tr ng-hide="reports.data">
+                      <td colspan="7">Loading data..</td>
+                    </tr>
+                </tbody>
+              </table>
+              <!-- <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="processSend()">
                 <div class="form-group" ng-controller="LawyersCtrl">
                   <select class="form-control" name="lawyer" ng-model="collects.lawyer" required>
                     <option value="">Choose an attorney</option>
@@ -110,18 +241,19 @@
                   <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date" required>
                 </div>
                 <div class="row">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient" required>
                   </div>
                   <hr class="visible-xs">
-                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber" required>
+                  </div>
+                  <hr class="visible-xs">
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="text" class="form-control" placeholder="Amount deposit" name="amount" ng-model="collects.amount" required>
                   </div>
                 </div>
                 <hr>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Amount deposit" name="amount" ng-model="collects.amount" required>
-                </div>
                 <div class="row">
                   <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="text" class="form-control" placeholder="Type of income" name="type" ng-model="collects.type">
@@ -160,7 +292,7 @@
                     Load massive data
                   </button>
                 </p>
-              </form>
+              </form> -->
             </div>
           </div>
         </tab><!-- collects -->
