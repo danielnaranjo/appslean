@@ -39,13 +39,15 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies,
         	 toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
         });
 	};
-//
-$scope.users = [
-    { id: 1, account: 'BM - Acc 3839', name: 'John Doe', file: '2015-DW-123456', amount: 4000, lawyers: 'Brandy Milazzo', expense: 2, fees: 150, comments: ''},
-    { id: 2, account: 'BM - Acc 3839', name: 'John Doe', file: '2015-DW-123456', amount: 4000, lawyers: 'Brandy Milazzo', expense: 2, fees: 150, comments: ''},
-    { id: 3, account: 'BM - Acc 3839', name: 'John Doe', file: '2015-DW-123456', amount: 4000, lawyers: 'Brandy Milazzo', expense: 2, fees: 150, comments: ''}
-  ];
 
+
+//
+$scope.splits = [
+    { id: 1, account: 'Other Trust Acc 4670', name: 'Caja Holdings', file: '2015-DW-123456', amount: '745', expense: 'Court Filling', fees: '150', comments: 'not set', split: [{lawyers: 'CL', fee: '386.75'},{lawyers: 'FIRM', fee: '208.25'}]},
+    { id: 2, account: 'Other Trust Acc 4670', name: 'Caja Holdings', file: '2015-DW-123456', amount: '250', expense: '', fees: '', comments: 'add funds', split: [{lawyers: 'CL', fee: '137.50'},{lawyers: 'DW', fee: '25'},{lawyers: 'FIRM', fee: '87.50'}]},
+    { id: 3, account: 'Other Trust Acc 4670', name: 'Caja Holdings', file: '2015-DW-123456', amount: '1655', expense: '', fees: '', comments: 'add funds', split: [{lawyers: 'CL', fee: '526.75'},{lawyers: 'DW', fee: '150.50'},{lawyers: 'FIRM', fee: '827.75'}]}
+  ];
+/*
 // dropbox lawyers
   $scope.lawyers = [];
   $scope.loadLawyers = function() {
@@ -134,7 +136,7 @@ $scope.users = [
     };
     $scope.users.push($scope.inserted);
   };
-
+*/
 //
   });
 
