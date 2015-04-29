@@ -1,0 +1,16 @@
+INSERT INTO `lawyers` (`uID`, `name`, `midle`, `lastname`, `ssn`, `address`, `city`, `zipcode`, `email`, `phone`, `mobile`, `partner`, `office`, `type`, `registered`, `username`, `password`, `employee`, `ninenine`, `wtwo`, `status`) VALUES
+(35, 'Brandy', '', 'Milazzo', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '1', '5', '2015-03-02 04:30:00', 'brandy', 'milazzo', NULL, NULL, NULL, '1'),
+(36, 'Suzanne', '', 'Schaffer', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '1', '5', '2015-03-02 04:30:00', 'suzanne', 'schaffer', NULL, NULL, NULL, '1'),
+(37, 'Daniella', '', 'Webb', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '0', '5', '2015-03-02 04:30:00', 'daniella', 'webb', NULL, NULL, NULL, '1'),
+(38, 'colin', '', 'stockton', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '1', '1', '2015-03-02 04:30:00', 'colin', 'stockton', NULL, NULL, NULL, '1'),
+(39, 'christa', '', 'sumwalt', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '0', '1', '2015-03-02 04:30:00', 'christa', 'sumwalt', NULL, NULL, NULL, '1'),
+(40, 'lew', '', 'glenn', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '1', '1', '2015-03-02 04:30:00', 'lew', 'glenn', NULL, NULL, NULL, '1'),
+(41, 'david', '', 'boggs', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '1', '1', '1', '2015-03-02 04:30:00', 'david', 'boggs', NULL, NULL, NULL, '1'),
+(42, 'steve', '', 'horowitz', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '0', '1', '1', '2015-03-02 04:30:00', 'steve', 'horowitz', NULL, NULL, NULL, '1'),
+(43, 'jennifer', '', 'nanarrow', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '0', '0', '1', '2015-03-02 04:30:00', 'jennifer', 'nanarrow', NULL, NULL, NULL, '1'),
+(44, 'genny', '', 'dausman', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '0', '1', '1', '2015-03-02 04:30:00', 'genny', 'dausman', NULL, NULL, NULL, '1'),
+(45, 'susan', '', 'paige sigmon', '0000', 'address', NULL, NULL, 'email@mswlawpllc.com', '704-000-0000', NULL, '0', '1', '1', '2015-03-02 04:30:00', 'susan', 'paige', NULL, NULL, NULL, '1'),
+(46, 'Malik', '', 'Dixon', '0000', '', NULL, NULL, 'email@mswlawpllc.com', '', NULL, '0', '1', '1', '2015-04-01 21:28:09', '', '', NULL, NULL, NULL, '1'),
+(47, 'Greg', '', 'Huffman', '0000', '', NULL, NULL, 'email@mswlawpllc.com', '', NULL, '0', '0', '1', '2015-04-01 21:28:38', '', '', NULL, NULL, NULL, '1'),
+(48, 'Carolynn', '', 'Lovejoy', '0000', '', NULL, NULL, 'email@mswlawpllc.com', '', NULL, '0', '0', '1', '2015-04-01 21:29:06', '', '', NULL, NULL, NULL, '1'),
+(49, 'Amy', '', 'Negron', '0000', '', NULL, NULL, 'email@mswlawpllc.com', '', NULL, '0', '1', '1', '2015-04-01 21:29:24', '', '', NULL, NULL, NULL, '1');

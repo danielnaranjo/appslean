@@ -27,7 +27,7 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <td><strong>Lawyers</strong></td>
+                <td><strong>Attorney</strong></td>
                 <td class="hidden-xs"><strong>Company/Name</strong></td>
                 <td><strong>File #</strong></td>
                 <td><strong>Last collect</strong></td>
@@ -37,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="d in reports.data | orderBy:date:reverse | limitTo:10">
+              <tr ng-repeat="d in reports.data | limitTo:10">
                 <td class="capitalize">{{d.name}} {{d.lastname}}</td>
                 <td class="hidden-xs">{{d.nameclient}}</td>
                 <td class="hidden-xs">{{d.filenumber}}</td>

@@ -22,7 +22,7 @@
     			<div class="panel panel-default">
 				  <div class="panel-body">
 				    <blockquote>
-				    	<input ng-model="message.text" ng-change="messages.$save(message)" style="border:0;">
+				    	<textarea ng-model="message.text" ng-change="messages.$save(message)" style="border:0;"></textarea>
 				    	<footer>{{message.startedAt|date}}</footer>
 				    <blockquote>
 				  </div>

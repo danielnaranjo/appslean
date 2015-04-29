@@ -19,7 +19,8 @@ var app = angular.module('calculatorApp', [
     'toaster',
     'ngAnimate',
     'ui.bootstrap',
-    'firebase'
+    'firebase',
+    'xeditable'
   ]);
 
 app.config(function ($routeProvider) {
@@ -64,7 +65,8 @@ app.config(function ($routeProvider) {
         redirectTo: '/login'
       });
   });
-app.run(function($rootScope, auth) {
+app.run(function($rootScope, auth, editableOptions) {
+  editableOptions.theme = 'bs3';
   // based on http://uno-de-piera.com/login-con-angularjs-utilizando-cookies-con-el-modulo-ngcookies/
   //al cambiar de rutas
   $rootScope.$on('$routeChangeStart', function() {

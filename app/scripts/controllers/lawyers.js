@@ -54,15 +54,16 @@ app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster, au
 	//modal
 	$scope.items = ['item1', 'item2', 'item3'];
 
-	$scope.open = function (size) {
+	$scope.open = function (id) {
+		console.log('received:',id);
 
 	var modalInstance = $modal.open({
 		templateUrl: 'views/modal.html',
 		controller: 'ModalInstanceCtrl',
-		// size: size,
+		size: 'lg',
 		resolve: {
-			items: function () {
-				return $scope.items;
+			id: function () {
+				return $scope.id;
 			}
 		}
 	});
@@ -76,12 +77,11 @@ app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster, au
 
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, id) {
 
-  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };
+  $scope.abogado='Brenda Defendini';
+  $scope.items = id;
+  console.log(id);
 
   $scope.ok = function () {
     //$modalInstance.close($scope.selected.item);

@@ -7,7 +7,7 @@
  * # MenuCtrl
  * Controller of the calculatorApp
  */
-app.controller('MenuCtrl', function($scope, $cookies, auth) {
+app.controller('MenuCtrl', function($scope, $cookies, auth, $firebaseArray) {
     // $scope.name='Daniel N.';
     // $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
 
@@ -20,21 +20,21 @@ app.controller('MenuCtrl', function($scope, $cookies, auth) {
       //   url: 'clients'
       // },
       {
-        name: 'Collects',
+        name: 'Deposits',
         url: 'collects'
       },// ,{
       //   name: 'Payments',
       //   url: 'payments'
       // },
       {
-        name: 'Lawyers',
+        name: 'Attorney',
         url: 'lawyers'
       },{
         name: 'Reports',
         url: 'reports'
       },
       {
-        name: 'Changelog',
+        name: 'Changelog ',
         url: 'private'
       }
       ];
