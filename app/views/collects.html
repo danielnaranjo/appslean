@@ -43,7 +43,7 @@
                     <td>Amount</td>
                     <td>Lawyer</td>
                     <td>Expenses</td>
-                    <td>Exp. Cost</td>
+                    <td>Cost</td>
                     <td ng-show="transfer.addcommet">Comments</td>
                   </tr>
                 </thead>
@@ -67,8 +67,8 @@
                     <td ng-show="transfer.payment==5">
                       <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="transfer.reference">
                     </td>
-                    <td ng-controller="LawyersCtrl">
-                      <select class="form-control" name="split" ng-model="transfer.split" required><!--multiple-->
+                    <td ng-controller="LawyersCtrl"><!-- multiple  -->
+                      <select class="form-control" name="split" ng-model="transfer.split" required>
                         <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
                           {{d.name}} {{d.lastname|limitTo:1}}
                         </option>
