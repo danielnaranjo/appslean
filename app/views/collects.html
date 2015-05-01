@@ -69,6 +69,7 @@
                     </td>
                     <td ng-controller="LawyersCtrl"><!-- multiple  -->
                       <select class="form-control" name="split" ng-model="transfer.split" required>
+                        <option value="">Splits / Lawyers</option>
                         <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
                           {{d.name}} {{d.lastname|limitTo:1}}
                         </option>
@@ -122,16 +123,30 @@
                       <td>{{s.filenumber}}</td>
                       <td>{{s.amount|currency}}</td>
                       <td style="border-left:5px solid #666">
-                        Not set
+                        <li style="margin:0;padding:5px;list-style:none;">Not set</li>
                       </td>
-                      <td>{{s.split}}</td>
-                      <td>{{s.expenses}}</td>
-                      <td>{{s.others|currency}}</td>
+                      <td>
+                        <li ng-show="s.split" ng-repeat="law in s.split track by $index" style="margin:0;padding:5px;list-style:none;">
+                          {{law}}
+                        </li>
+                      </td>
+                      <td>
+                        <span ng-show="s.expenses>0" ng-repeat="e in s.expenses" style="margin-right:5px;padding:5px;background-color:#f00;">
+                          {{e}}
+                        </span>
+                      </td>
+                      <td>
+                        <span ng-show="s.fees>0" ng-repeat="f in s.fees" style="margin-right:5px;padding:5px;">
+                          {{f|currency}}
+                        </span>
+                      </td>
                       <td>{{s.comments}}</td>
                     </tr>
                   </tbody>
                 </table>
-              <button class="btn btn-success" ng-click="addUser()">Add attorney report</button>
+              <a href="#/collects">
+                <button class="btn btn-success">Add attorney report</button>
+              </a>
             </div>
           </div>
         </tab><!-- split -->

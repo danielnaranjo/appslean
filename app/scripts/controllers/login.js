@@ -24,8 +24,13 @@ app.controller('LoginCtrl', function ($scope, $location, $http, auth, Data, toas
             //console.log(JSON.stringify(data));
             if(data.status==='success') {
                 toaster.pop(data.status, '', data.message, 5000, 'trustedHtml');
+
                 $cookies.username = data.name;
-                console.log(data.name);
+                $cookies.taxes = data.taxes;
+                $cookies.partner = data.partner;
+                $cookies.type = data.type;
+                console.log($cookies.username);
+
                 auth.login($scope.username, $scope.password);
             } 
             if(data.status==='error') {

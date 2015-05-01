@@ -9,6 +9,8 @@
  */
 app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $cookies, auth) {
 
+    $scope.username=$cookies.username;
+    console.log($cookies.username);
     // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/charts/1' })
     // .success(function(data){ $scope.chart1=data; })
     // .error(function(){ console.log('Error API chart1'); });

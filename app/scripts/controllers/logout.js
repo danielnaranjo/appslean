@@ -9,6 +9,7 @@
  */
 app.controller('LogoutCtrl', function ($scope, $cookieStore, $location, toaster) {
     $cookieStore.remove('username');
+    $cookieStore.remove('password');
     //$cookieStore.remove('password');
     toaster.pop('sucess', '', 'Session closed', 10000, 'trustedHtml');
     console.log('Session closed and cookie deleted!');
