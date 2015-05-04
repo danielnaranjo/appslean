@@ -12,6 +12,62 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
+    	<!-- new layout -->
+    	<div class="row">
+    		<div class="col-md-12">
+
+	     <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
+
+	     	<angucomplete id="members"
+              placeholder="Search members"
+              pause="400"
+              selectedobject="testObj"
+              url="http://apps-lean.com/api/v1/findby/"
+              datafield="data"
+              titlefield="nameclient,filenumber"
+              inputclass="form-control form-control-small"/>
+            <!-- <div class="" ng-show="selectedPerson">
+                You selected <span class="bold-span">{{selectedPerson.nameclient}} {{selectedPerson.filenumber}}</span>
+            </div> -->
+            <hr>
+
+	     	<div class="form-group">
+	     		<label>Company or person name, file number</label>
+	     		<input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="transfer.filenumber" required>
+	     		<label ng-hide="lawyer.exist==1">
+	     			<input type="checkbox" ng-model="lawyer.exist">
+					Yes, I have some expenses
+				</label>
+	     	</div>
+	     	<hr>
+	     	<!-- <div class="form-group" ng-hide="lawyer.exist==1">
+	     		<label>
+					
+				</label>
+	     	</div> -->
+	     	<div class="form-group" ng-show="lawyer.exist==1">
+	     		<label>Expenses</label>
+	     		<textarea name="expenses" id="expenses" ng-model="transfer.expenses" class="form-control"></textarea>
+	     		<small>* autocomplete tags</small>
+	     	</div>
+	     	<div class="form-group" ng-show="transfer.expenses">
+	     		<label>Expenses amount</label>
+	     		<input type="text" name="fees" ng-model="transfer.fees" class="form-control">
+	     		<small>(separate by commas)</small>
+	     	</div>
+	     	<hr>
+	     	<div class="form-group">
+	     		<label>Lawyers / attorney splits</label>
+	     		<textarea name="split" id="split" ng-model="transfer.split" class="form-control"></textarea>
+	     		<small>* autocomplete tags</small>
+	     	</div>
+
+	     	
+	     </form>
+	   
+
+    		</div>
+    	</div> <!-- new layout -->
 	  <div class="row"> <!--  style="display:none;" -->
 	    <div class="col-md-12">
 	      <h3>Attorney split report</h3>
@@ -100,6 +156,7 @@
 	        </tfoot>
 	      </table>
 	      </form>
+
 	      <h3>Attorney split report</h3>
 	         <table class="table table-hover table-condensed" style="margin-top:10px;">
 	          <thead>

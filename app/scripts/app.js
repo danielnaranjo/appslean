@@ -19,6 +19,7 @@ var app = angular.module('calculatorApp', [
     'toaster',
     'ui.bootstrap',
     'firebase',
+    // "angucomplete",
     'xeditable'
   ]);
 

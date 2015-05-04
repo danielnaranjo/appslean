@@ -7,7 +7,6 @@
  * # exchange
  * Factory in the calculatorApp.
  */
-angular.module('calculatorApp')
-  .factory('exchange', function () {
+app.factory('exchange', function () {
     data: {}
   });

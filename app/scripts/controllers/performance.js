@@ -7,8 +7,7 @@
  * # PerformanceCtrl
  * Controller of the calculatorApp
  */
-angular.module('calculatorApp')
-  .controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cookies, $filter, auth) {
+app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cookies, $filter, auth) {
 
   //console.log('cookie: ',$cookies);
   $scope.taxes = $cookies.taxes;
@@ -55,5 +54,32 @@ angular.module('calculatorApp')
   $scope.loadTags = function(query) {
     return tags.query().$promise;
   };
+
+
+  $scope.countries = [
+            {name: 'Afghanistan', code: 'AF'},
+            {name: 'Aland Islands', code: 'AX'},
+            {name: 'Albania', code: 'AL'},
+            {name: 'Algeria', code: 'DZ'},
+            {name: 'American Samoa', code: 'AS'},
+            {name: 'AndorrA', code: 'AD'},
+            {name: 'Angola', code: 'AO'},
+            {name: 'Anguilla', code: 'AI'},
+            {name: 'Antarctica', code: 'AQ'},
+            {name: 'Antigua and Barbuda', code: 'AG'},
+            {name: 'Argentina', code: 'AR'},
+            {name: 'Armenia', code: 'AM'},
+            {name: 'Aruba', code: 'AW'},
+            {name: 'Australia', code: 'AU'},
+            {name: 'Austria', code: 'AT'},
+            {name: 'Azerbaijan', code: 'AZ'},
+            {name: 'Bahamas', code: 'BS'},
+            {name: 'Bahrain', code: 'BH'},
+            {name: 'Bangladesh', code: 'BD'},
+            {name: 'Barbados', code: 'BB'},
+            {name: 'Belarus', code: 'BY'},
+            {name: 'Belgium', code: 'BE'},
+            {name: 'Belize', code: 'BZ'},
+            {name: 'Benin', code: 'BJ'}];
 
   });
