@@ -23,4 +23,8 @@ app.controller("PrivateCtrl", function($scope, $firebaseArray, auth, $cookies) {
     $scope.newMessageText = '';
   };
   // click on `index.html` above to see $remove() and $save() in action
+
+  $scope.taxes = $cookies.taxes;
+  $scope.partner = $cookies.partner ;
+  $scope.type = $cookies.type;
 });

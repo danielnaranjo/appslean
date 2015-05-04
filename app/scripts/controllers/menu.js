@@ -11,31 +11,37 @@ app.controller('MenuCtrl', function($scope, $cookies, auth, $firebaseArray) {
     // $scope.name='Daniel N.';
     // $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
 
-    $scope.menus = [{
-        name: 'Dashboad',
-        url: 'main'
-      },
-      // {
-      //   name: 'Clients',
-      //   url: 'clients'
-      // },
-      {
-        name: 'Deposits',
-        url: 'collects'
-      },// ,{
-      //   name: 'Payments',
-      //   url: 'payments'
-      // },
-      {
-        name: 'Attorney',
-        url: 'lawyers'
-      },{
-        name: 'Reports',
-        url: 'reports'
-      },
-      {
-        name: 'Changelog ',
-        url: 'private'
-      }
-      ];
+    $scope.username = $cookies.username;
+    $scope.taxes = $cookies.taxes;
+    $scope.partner = $cookies.partner ;
+    $scope.type = $cookies.type;
+    // console.log('cookie: ',$cookies);
+
+    // $scope.menus = [{
+    //     name: 'Dashboad',
+    //     url: 'main'
+    //   },
+    //   // {
+    //   //   name: 'Clients',
+    //   //   url: 'clients'
+    //   // },
+    //   {
+    //     name: 'Deposits',
+    //     url: 'collects'
+    //   },// ,{
+    //   //   name: 'Payments',
+    //   //   url: 'payments'
+    //   // },
+    //   {
+    //     name: 'Attorney',
+    //     url: 'lawyers'
+    //   },{
+    //     name: 'Reports',
+    //     url: 'reports'
+    //   },
+    //   {
+    //     name: 'Changelog ',
+    //     url: 'private'
+    //   }
+    //   ];
   });

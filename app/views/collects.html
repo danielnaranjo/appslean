@@ -12,266 +12,124 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <tabset>
-        <tab heading="Attorney split report">
-          <div class="row"> <!--  style="display:none;" -->
-            <div class="col-md-12">
-              <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <td colspan="8">
-                      <label>Date</label>
-                      <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="transfer.date" required style="width:300px;">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td colspan="8" ng-controller="LawyersCtrl">
-                      <label>Transfer Form</label>
-                      <select class="form-control" name="lawyer" ng-model="transfer.lawyer" required style="width:300px;">
-                        <option value="">Attorney</option>
-                        <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-                          {{d.name}} {{d.lastname}}
-                        </option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr style="font-weight: bold">
-                    <td>Trust Acc.</td>
-                    <td>Client</td>
-                    <td>File #</td>
-                    <td>Amount</td>
-                    <td>Lawyer</td>
-                    <td>Expenses</td>
-                    <td>Cost</td>
-                    <td ng-show="transfer.addcommet">Comments</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <select class="form-control" name="trusts" ng-model="transfer.trusts" required>
-                        <option value="">Accounts</option>
-                        <option value="{{a.sID}}" ng-repeat="a in trusts.data">{{a.notes}}</option>
-                      </select>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="transfer.nameclient" required>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="transfer.filenumber" required>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="ex. 1000" name="amount" ng-model="transfer.amount" required>
-                    </td>
-                    <td ng-show="transfer.payment==5">
-                      <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="transfer.reference">
-                    </td>
-                    <td ng-controller="LawyersCtrl"><!-- multiple  -->
-                      <select class="form-control" name="split" ng-model="transfer.split" required>
-                        <option value="">Splits / Lawyers</option>
-                        <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-                          {{d.name}} {{d.lastname|limitTo:1}}
-                        </option>
-                      </select>
-                    </td>
-                    <td>
-                      <textarea class="form-control" placeholder="ex. Court filling" name="expenses" ng-model="transfer.expenses"></textarea>
-                    </td>
-                    <td>
-                      <textarea class="form-control" placeholder="ex. 150" name="expense" ng-model="transfer.expense"></textarea>
-                    </td>
-                    <td ng-show="transfer.addcommet">
-                      <textarea class="form-control" placeholder="Notes" name="comments" ng-model="transfer.comments"></textarea>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="9">
-                      <p>
-                        <button type="submit" class="btn btn-success" ng-submit="transferSend()">
-                          Add daily collect
-                        </button>
-                        <input type="checkbox" ng-model="transfer.addcommet"> 
-                        <span ng-hide="transfer.addcommet">Add</span><span ng-show="transfer.addcommet">Remove</span> comments
-                      </p>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-              </form>
-              <h3>Attorney split report</h3>
-                 <table class="table table-hover table-condensed" style="margin-top:10px;">
-                  <thead>
-                    <tr style="font-weight: bold">
-                      <td style="width:110px">Trust Acc.</td>
-                      <td style="width:130px">Company or person name</td>
-                      <td style="width:120px">File #</td>
-                      <td>Amount</td>
-                      <td>Split fees</td>
-                      <td>Splits / Lawyers</td>
-                      <td>Expenses</td>
-                      <td>Amounts</td>
-                      <td style="width:140px">Comments</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="s in splits.data">
-                      <td>{{s.trusts}}</td>
-                      <td>{{s.nameclient}}</td>
-                      <td>{{s.filenumber}}</td>
-                      <td>{{s.amount|currency}}</td>
-                      <td style="border-left:5px solid #666">
-                        <li style="margin:0;padding:5px;list-style:none;">Not set</li>
-                      </td>
-                      <td>
-                        <li ng-show="s.split" ng-repeat="law in s.split track by $index" style="margin:0;padding:5px;list-style:none;">
-                          {{law}}
-                        </li>
-                      </td>
-                      <td>
-                        <span ng-show="s.expenses>0" ng-repeat="e in s.expenses" style="margin-right:5px;padding:5px;background-color:#f00;">
-                          {{e}}
-                        </span>
-                      </td>
-                      <td>
-                        <span ng-show="s.fees>0" ng-repeat="f in s.fees" style="margin-right:5px;padding:5px;">
-                          {{f|currency}}
-                        </span>
-                      </td>
-                      <td>{{s.comments}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              <a href="#/collects">
-                <button class="btn btn-success">Add attorney report</button>
-              </a>
-            </div>
-          </div>
-        </tab><!-- split -->
-        <tab heading="Deposit Receipt">
-          <h3>Collect report</h3>
-          <div class="row"><!--  style="display:none;" -->
-            <div class="col-md-12">
-              <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="processSend()">
-              <table class="table">
-                <thead>
-                  <tr style="font-weight: bold">
-                    <td style="width:30px">Date</td>
-                    <td>Client</td>
-                    <td>File #</td>
-                    <td>Lawyer</td>
-                    <td>Payment</td>
-                    <td ng-show="collects.payment==5">Ref.</td>
-                    <td>Deposited</td>
-                    <td>Trust Acc.</td>
-                    <td>Income</td>
-                    <td ng-show="collects.addcommet">Comments</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date" required>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient" required>
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber" required>
-                    </td>
-                    <td ng-controller="LawyersCtrl">
-                      <select class="form-control" name="lawyer" ng-model="collects.lawyer" required>
-                        <option value="">Attorney</option>
-                        <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-                          {{d.name}} {{d.lastname|limitTo:1}}
-                        </option>
-                      </select>
-                    </td>
-                    <td>
-                      <select class="form-control" name="payment" ng-model="collects.payment" required>
-                        <option value="">Method</option>
-                        <option value="{{p.pID}}" ng-repeat="p in payments.data">{{p.payment}}</option>
-                      </select>
-                    </td>
-                    <td ng-show="collects.payment==5">
-                      <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="collects.reference">
-                    </td>
-                    <td>
-                      <input type="text" class="form-control" placeholder="ex. 1000" name="amount" ng-model="collects.amount" required>
-                    </td>
-                    <td>
-                      <select class="form-control" name="account" ng-model="collects.account" required>
-                        <option value="">Accounts</option>
-                        <option value="{{a.sID}}" ng-repeat="a in trusts.data">{{a.notes}}</option>
-                      </select>
-                    </td>
-                    <td>
-                      <select class="form-control" name="type" ng-model="collects.type" required>
-                        <option value="">Income</option>
-                        <option value="{{i.eID}}" ng-repeat="i in incomes.data">{{i.income}}</option>
-                      </select>
-                    </td>
-                    <td ng-show="collects.addcommet">
-                      <textarea class="form-control" placeholder="Notes" name="comments" ng-model="collects.comments"></textarea>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <td colspan="9">
-                      <p>
-                        <button type="submit" class="btn btn-success" ng-submit="processSend()">
-                          Add daily collect
-                        </button>
-                        <!-- <button class="btn btn-primary disabled hidden-xs">
-                          Save and continue
-                        </button> -->
-                        <input type="checkbox" ng-model="collects.addcommet"> 
-                        <span ng-hide="collects.addcommet">Add</span><span ng-show="collects.addcommet">Remove</span> comments
-                        <button class="btn btn-warning pull-right disabled hidden-xs">
-                          Load massive data
-                        </button>
-                      </p>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-              </form>
-              {{collects}}
-              <h3>Last 5 collects</h3>
-              <table class="table table-striped table-hover" ng-controller="ReportsCtrl">
-                <thead>
-                  <tr>
-                    <td><strong>Attorney</strong></td>
-                    <td class="hidden-xs"><strong>Company/Name</strong></td>
-                    <td><strong>File #</strong></td>
-                    <td><strong>Last collect</strong></td>
-                    <td><strong>Amount</strong></td>
-                    <td class="hidden-xs"><strong>Payment</strong></td>
-                    <td> </td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="d in reports.data | limitTo:5">
-                    <td class="capitalize">{{d.name}} {{d.lastname}}</td>
-                    <td class="hidden-xs">{{d.nameclient}}</td>
-                    <td class="hidden-xs">{{d.filenumber}}</td>
-                    <td class="hidden-xs">{{d.payment}}</td>
-                    <td>{{d.amount|currency}}</td>
-                    <td>{{d.date|date}}</td>
-                    <td><a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a></td>
-                  </tr>
-                    <tr ng-hide="reports.data">
-                      <td colspan="7">Loading data..</td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </tab><!-- collects -->
-      </tabset>
+      <h3>Deposit Receipt</h3>
+      <div class="row"><!--  style="display:none;" -->
+        <div class="col-md-12">
+          <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="processSend()">
+          <table class="table">
+            <thead>
+              <tr style="font-weight: bold">
+                <td style="width:30px">Date</td>
+                <td>Client</td>
+                <td>File #</td>
+                <td>Lawyer</td>
+                <td>Payment</td>
+                <td ng-show="collects.payment==5">Ref.</td>
+                <td>Deposited</td>
+                <td>Trust Acc.</td>
+                <td>Income</td>
+                <td ng-show="collects.addcommet">Comments</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="collects.date" required>
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="collects.nameclient" required>
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="collects.filenumber" required>
+                </td>
+                <td ng-controller="LawyersCtrl">
+                  <select class="form-control" name="lawyer" ng-model="collects.lawyer" required>
+                    <option value="">Attorney</option>
+                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+                      {{d.name}} {{d.lastname|limitTo:1}}
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" name="payment" ng-model="collects.payment" required>
+                    <option value="">Method</option>
+                    <option value="{{p.pID}}" ng-repeat="p in payments.data">{{p.payment}}</option>
+                  </select>
+                </td>
+                <td ng-show="collects.payment==5">
+                  <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="collects.reference">
+                </td>
+                <td>
+                  <input type="text" class="form-control" placeholder="ex. 1000" name="amount" ng-model="collects.amount" required>
+                </td>
+                <td>
+                  <select class="form-control" name="account" ng-model="collects.account" required>
+                    <option value="">Accounts</option>
+                    <option value="{{a.sID}}" ng-repeat="a in trusts.data">{{a.notes}}</option>
+                  </select>
+                </td>
+                <td>
+                  <select class="form-control" name="type" ng-model="collects.type" required>
+                    <option value="">Income</option>
+                    <option value="{{i.eID}}" ng-repeat="i in incomes.data">{{i.income}}</option>
+                  </select>
+                </td>
+                <td ng-show="collects.addcommet">
+                  <textarea class="form-control" placeholder="Notes" name="comments" ng-model="collects.comments"></textarea>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="9">
+                  <p>
+                    <button type="submit" class="btn btn-success" ng-submit="processSend()">
+                      Add daily collect
+                    </button>
+                    <!-- <button class="btn btn-primary disabled hidden-xs">
+                      Save and continue
+                    </button> -->
+                    <input type="checkbox" ng-model="collects.addcommet"> 
+                    <span ng-hide="collects.addcommet">Add</span><span ng-show="collects.addcommet">Remove</span> comments
+                    <button class="btn btn-warning pull-right disabled hidden-xs">
+                      Load massive data
+                    </button>
+                  </p>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+          </form>
+          <h3>Last 5 collects</h3>
+          <table class="table table-striped table-hover" ng-controller="ReportsCtrl">
+            <thead>
+              <tr>
+                <td><strong>Attorney</strong></td>
+                <td class="hidden-xs"><strong>Company/Name</strong></td>
+                <td><strong>File #</strong></td>
+                <td><strong>Last collect</strong></td>
+                <td><strong>Amount</strong></td>
+                <td class="hidden-xs"><strong>Payment</strong></td>
+                <td> </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="d in reports.data | limitTo:5">
+                <td class="capitalize">{{d.name}} {{d.lastname}}</td>
+                <td class="hidden-xs">{{d.nameclient}}</td>
+                <td class="hidden-xs">{{d.filenumber}}</td>
+                <td class="hidden-xs">{{d.payment}}</td>
+                <td>{{d.amount|currency}}</td>
+                <td>{{d.date|date}}</td>
+                <td><a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a></td>
+              </tr>
+                <tr ng-hide="reports.data">
+                  <td colspan="7">Loading data..</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

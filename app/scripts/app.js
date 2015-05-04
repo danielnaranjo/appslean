@@ -17,7 +17,6 @@ var app = angular.module('calculatorApp', [
     'ngTouch',
     'googlechart',
     'toaster',
-    'ngAnimate',
     'ui.bootstrap',
     'firebase',
     'xeditable'
@@ -60,6 +59,10 @@ app.config(function ($routeProvider) {
       .when('/private', {
         templateUrl: 'views/private.html',
         controller: 'PrivateCtrl'
+      })
+      .when('/performance', {
+        templateUrl: 'views/performance.html',
+        controller: 'PerformanceCtrl'
       })
       .otherwise({
         redirectTo: '/login'

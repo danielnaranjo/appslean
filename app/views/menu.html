@@ -1,6 +1,26 @@
 <ul ng-controller="MenuCtrl">
-    <li ng-repeat="menu in menus">
-        <a ng-href="#/{{menu.url}}">{{menu.name}}</a>
+    <li>
+        <a ng-href="#/main">Dashboad</a>
     </li>
-    <li><a ng-href="#/logout" class="logout">Logout</a></li>
+    <li ng-show="partner!=1">
+        <a ng-href="#/performance">Daily performance</a>
+    </li>
+    <li ng-show="partner==1">
+        <a ng-href="#/collects">Collects & Deposits</a>
+    </li>
+    <li ng-show="partner==1">
+        <a ng-href="#/lawyers">Attorney</a>
+    </li>
+    <li>
+        <a ng-href="#/reports">Reports</a>
+    </li>
+    <li ng-show="partner==1">
+        <a ng-href="#/settings">Settings</a>
+    </li>
+    <li ng-show="partner==1">
+        <a ng-href="#/private">Changelog</a>
+    </li>
+    <li>
+        <a ng-href="#/logout" class="logout">Logout</a>
+    </li>
 </ul>

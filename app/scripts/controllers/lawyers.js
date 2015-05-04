@@ -9,6 +9,11 @@
  */
 app.controller('LawyersCtrl', function ($scope, $http, $modal, $log, toaster, auth, $cookies) {
 
+	//console.log('cookie: ',$cookies);
+	$scope.taxes = $cookies.taxes;
+	$scope.partner = $cookies.partner ;
+	$scope.type = $cookies.type;
+  
 	var d = new Date();
 	var n = d.getTime();
 	$http({

@@ -29,7 +29,7 @@ app.controller('LoginCtrl', function ($scope, $location, $http, auth, Data, toas
                 $cookies.taxes = data.taxes;
                 $cookies.partner = data.partner;
                 $cookies.type = data.type;
-                console.log($cookies.username);
+                //console.log('cookie: ',$cookies);
 
                 auth.login($scope.username, $scope.password);
             } 
