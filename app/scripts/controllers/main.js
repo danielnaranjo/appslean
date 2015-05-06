@@ -66,48 +66,49 @@ app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $c
   //
  var chart1 = {};
     chart1.type = "ColumnChart";
-    chart1.cssStyle = "height:250px; width:350px;";
+    chart1.cssStyle = "height:300px; width:100%;";
     chart1.data = {"cols": [
         {id: "month", label: "Month", type: "string"},
-        {id: "laptop-id", label: "NETK Work- NETK Generated Client", type: "number"},
-        {id: "desktop-id", label: "NETK Work- Equity Member Generated Client (No supervision)", type: "number"},
-        {id: "server-id", label: "NETK Work- Equity Member Generated Client (Supervision)", type: "number"},
-        {id: "cost-id", label: "NETK Work- Other NETK client (Supervision)", type: "number"}
+        {id: "collects", label:"Deposits", type: "number"},
+        {id: "amounts", label:"Amount", type: "number"}
     ], "rows": [
         {c: [
             {v: "January"},
-            {v: 19, f: "42 items"},
-            {v: 12, f: "Ony 12 items"},
-            {v: 7, f: "7 servers"},
-            {v: 4}
+            {v: 19, f: "42"},
+            {v: 19, f: "50000"}
         ]},
         {c: [
             {v: "February"},
             {v: 13},
-            {v: 1, f: "1 unit (Out of stock this month)"},
-            {v: 12},
-            {v: 2}
+            {v: 19, f: "4200"}
         ]},
         {c: [
             {v: "March"},
             {v: 24},
-            {v: 0},
-            {v: 11},
-            {v: 6}
-
+            {v: 19, f: "420"}
+        ]},
+        {c: [
+            {v: "April"},
+            {v: 10},
+            {v: 19, f: "5642"}
+        ]},
+        {c: [
+            {v: "May"},
+            {v: 1},
+            {v: 19, f: "4442"}
         ]}
     ]};
 
     chart1.options = {
         "title": "Compensation Splits",
         "isStacked": "true",
-        "fill": 20,
+        "fill": 50,
         "displayExactValues": true,
         "vAxis": {
             "title": "Monthly collects", "gridlines": {"count": 6}
         },
         "hAxis": {
-            "title": "Date"
+            "title": "Compare by month"
         }
     };
     chart1.formatters = {};

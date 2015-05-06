@@ -5,3 +5,9 @@ dist
 bower_components
 *.png
 *.zip
+
+.htaccess
+_notes
+api/libs/
+api/config.php
+api/v1/

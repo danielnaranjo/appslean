@@ -62,7 +62,7 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/private.html',
         controller: 'PrivateCtrl'
       })
-      .when('/performance', {
+      .when('/performance/:id', {
         templateUrl: 'views/performance.html',
         controller: 'PerformanceCtrl'
       })

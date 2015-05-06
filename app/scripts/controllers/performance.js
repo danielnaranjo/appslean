@@ -43,6 +43,10 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
   //   console.log('Error API expenses');
   // });
 
+  $http({ method: 'GET',url: 'http://apps-lean.com/api/v1/lawyers/'+n })
+  .success(function(data){ $scope.lawyers=data; })
+  .error(function(){ console.log('Error API lawyers'); });
+
   $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/trusts/'+n })
   .success(function(data){ $scope.trusts=data; })
   .error(function(){ console.log('Error API trusts'); });

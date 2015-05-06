@@ -17,8 +17,10 @@
     		<div class="col-md-12">
     			<h3>Attorney split report</h3>
 	     		<form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
-	     			<p>
-			     	<label>Company or person name / File number</label>
+	     			<div class="form-group">
+	     				<label>Company or person name / File number</label>
+	     			 	<input type="text" class="form-control" ng-model="transfer.nameclient" placeholder="Daniel Naranjo" disabled>
+	     			<!-- <p>
 			     	<angucomplete id="client"
 						placeholder="ex. Caja Holdings"
 						pause="400"
@@ -29,9 +31,9 @@
 						inputclass="form-control form-control-small"
 						model="transfer.nameclient"
 						required>
-					</p>
-					<p>
-					<!-- <label>File number</label>
+					</p> -->
+					<!-- <p>
+					<label>File number</label>
 					<angucomplete id="case"
 						placeholder="ex. 0000-SS-12345678"
 						pause="400"
@@ -43,7 +45,13 @@
 						model="transfer.filenumber"
 						required>
 					</p> -->
-		     		<label>
+					</div>
+					<div class="form-group">
+	     				<label>File number</label>
+	     			 	<input type="text" class="form-control" ng-model="transfer.filenumber" placeholder="0000" disabled>
+					</div>
+					<div>
+					<label>
 		     			<input type="checkbox" ng-model="lawyer.exist">
 						<span ng-hide="lawyer.exist==1">Yes, I have some expenses</span>
 						<span ng-show="lawyer.exist">Remove expense</span>
@@ -53,27 +61,37 @@
 						<span ng-hide="lawyer.splits==1">Any other lawyer in this case?</span>
 						<span ng-show="lawyer.splits">Remove other lawyer</span>
 					</label>
+					</div>
 					<hr ng-show="lawyer.exist==1" >
 			     	<div class="form-group" ng-show="lawyer.exist==1" ><!---->
 			     		<label>Expenses</label>
-			     		<tags-input ng-model="gastos" placeholder="Add a expenses" >
+			     		<tags-input ng-model="gastos" placeholder="Remove expenses" >
 			     			<auto-complete source="loadTags($query)"></auto-complete>
 			     		</tags-input>
-			     		<small>* autocomplete tags</small>
 			     	</div>
 			     	<div class="form-group" ng-show="lawyer.exist==1" > <!-- -->
 			     		<label>Expenses amount</label>
 			     		<input type="text" name="fees" ng-model="transfer.fees" class="form-control">
-			     		<small>(separate by commas)</small>
+			     		<small>(separate by commas in order)</small>
 			     	</div>
 			     	<div class="form-group" ng-show="lawyer.splits">
 			     		<hr>
 			     		<label>Lawyers / attorney splits</label>
-			     		<!-- <textarea name="split" id="split" ng-model="transfer.split" class="form-control"></textarea> -->
-			     		<tags-input ng-model="abogados" placeholder="Add a attorney or lawyer" >
-			     			<auto-complete source="loadLawyers($query)"></auto-complete>
-			     		</tags-input>
-			     		<small>* autocomplete tags</small>
+			     		<select class="form-control" name="lawyer" ng-model="transfer.lawyer" required>
+		                    <option value="">Primary Attorney</option>
+		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+		                      {{d.name}} {{d.lastname}}
+		                    </option>
+		                  </select>
+			     	</div>
+			     	<div class="form-group" ng-show="lawyer.splits">
+			     		<label>Lawyers / attorney splits</label>
+			     		<select class="form-control" name="lawyer" ng-model="transfer.lawyer" required>
+		                    <option value="">Second Attorney</option>
+		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+		                      {{d.name}} {{d.lastname}}
+		                    </option>
+		                  </select>
 			     	</div>
 			     	<div class="form-group" ng-show="transfer.addcommet">
 			     		<hr>
@@ -81,8 +99,8 @@
 			     	</div>
 			     	<p>
 			     		<br>
-		                <button type="submit" class="btn btn-success" ng-submit="transferSend()" ng-disabled="!transfer.filenumber">
-		                  Add daily collect
+		                <button type="submit" class="btn btn-success" ng-submit="transferSend()"> <!--  ng-disabled="!transfer.filenumber" -->
+		                  Add split report
 		                </button>
 		                <input type="checkbox" ng-model="transfer.addcommet"> 
 		                <span ng-hide="transfer.addcommet">Add</span><span ng-show="transfer.addcommet">Remove</span> comments

@@ -9,7 +9,7 @@
  */
 app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
 
-	//console.log('cookie: ',$cookies);
+	console.log('cookie: ',$cookies);
 	$scope.uID = $cookies.uID;
     $scope.taxes = $cookies.taxes;
 	$scope.partner = $cookies.partner ;
@@ -17,8 +17,15 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
   
     var d = new Date();
     var n = d.getTime();
-    $http({ method:'GET',url:'http://apps-lean.com/api/v1/reports/'+n })
-    .success(function(data){ $scope.reports=data; })
-    .error(function(){ console.log('Error API lawyers'); });
+    $http({
+        method:'GET',
+        url:'http://apps-lean.com/api/v1/report/'+$cookies.uID
+    })
+    .success(function(data){
+        $scope.reports=data;
+    })
+    .error(function(){
+        console.log('Error API lawyers');
+    })
 
   });
