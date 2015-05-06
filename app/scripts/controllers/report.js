@@ -14,7 +14,8 @@ app.controller('ReportCtrl', function ($scope, $http, Data, auth, $cookies) {
       'Karma'
     ];
     //console.log('cookie: ',$cookies);
-	$scope.taxes = $cookies.taxes;
+	$scope.uID = $cookies.uID;
+  $scope.taxes = $cookies.taxes;
 	$scope.partner = $cookies.partner ;
 	$scope.type = $cookies.type;
   });

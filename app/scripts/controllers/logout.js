@@ -8,9 +8,13 @@
  * Controller of the calculatorApp
  */
 app.controller('LogoutCtrl', function ($scope, $cookieStore, $location, toaster) {
+    $cookieStore.remove('uID');
+    $cookieStore.remove('taxes');
+    $cookieStore.remove('partner');
+    $cookieStore.remove('type');
+    $cookieStore.remove('name');
     $cookieStore.remove('username');
     $cookieStore.remove('password');
-    //$cookieStore.remove('password');
     toaster.pop('sucess', '', 'Session closed', 10000, 'trustedHtml');
     console.log('Session closed and cookie deleted!');
     //mandamos al login

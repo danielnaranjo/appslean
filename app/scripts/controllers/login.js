@@ -25,11 +25,11 @@ app.controller('LoginCtrl', function ($scope, $location, $http, auth, Data, toas
             if(data.status==='success') {
                 toaster.pop(data.status, '', data.message, 5000, 'trustedHtml');
 
-                $cookies.username = data.name;
+                $cookies.uID = data.uID;
                 $cookies.taxes = data.taxes;
                 $cookies.partner = data.partner;
                 $cookies.type = data.type;
-                //console.log('cookie: ',$cookies);
+                console.log('cookie: ',$cookies);
 
                 auth.login($scope.username, $scope.password);
             } 

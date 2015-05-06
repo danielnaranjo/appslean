@@ -12,6 +12,14 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="alert alert-warning">
+            <h3>You deposit ready to split!</h3>
+            <p>Click <a href="#/performance">here</a> to continue</p>
+          </div>
+        </div>
+      </div>
       <div class="row hidden-xs">
         <div class="col-md-7 col-sm-6 col-xs-12">
           <h3 ng-hide="chart1">Loading charts</h3>
@@ -38,7 +46,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="d in reports.data | limitTo:10">
-                <td class="capitalize">{{d.name}} {{d.lastname}}</td>
+                <td class="capitalize"><a href="#/performance">{{d.name}} {{d.lastname}}</a></td>
                 <td class="hidden-xs">{{d.nameclient}}</td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
                 <td class="hidden-xs">{{d.payment}}</td>

@@ -10,6 +10,7 @@
 app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies, $filter, auth) {
 
   //console.log('cookie: ',$cookies);
+  $scope.uID = $cookies.uID;
   $scope.taxes = $cookies.taxes;
   $scope.partner = $cookies.partner ;
   $scope.type = $cookies.type;

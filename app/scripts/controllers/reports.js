@@ -10,7 +10,8 @@
 app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
 
 	//console.log('cookie: ',$cookies);
-	$scope.taxes = $cookies.taxes;
+	$scope.uID = $cookies.uID;
+    $scope.taxes = $cookies.taxes;
 	$scope.partner = $cookies.partner ;
 	$scope.type = $cookies.type;
   

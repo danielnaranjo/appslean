@@ -18,20 +18,20 @@
     			<h3>Attorney split report</h3>
 	     		<form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
 	     			<p>
-			     	<label>Company or person name</label>
+			     	<label>Company or person name / File number</label>
 			     	<angucomplete id="client"
 						placeholder="ex. Caja Holdings"
 						pause="400"
 						selectedobject="transfer.nameclient"
 						url="http://apps-lean.com/api/v1/findbyclient/"
 						datafield="data"
-						titlefield="nameclient"
+						titlefield="nameclient,filenumber"
 						inputclass="form-control form-control-small"
 						model="transfer.nameclient"
 						required>
 					</p>
 					<p>
-					<label>File number</label>
+					<!-- <label>File number</label>
 					<angucomplete id="case"
 						placeholder="ex. 0000-SS-12345678"
 						pause="400"
@@ -42,7 +42,7 @@
 						inputclass="form-control form-control-small"
 						model="transfer.filenumber"
 						required>
-					</p>
+					</p> -->
 		     		<label>
 		     			<input type="checkbox" ng-model="lawyer.exist">
 						<span ng-hide="lawyer.exist==1">Yes, I have some expenses</span>
@@ -81,7 +81,7 @@
 			     	</div>
 			     	<p>
 			     		<br>
-		                <button type="submit" class="btn btn-success" ng-submit="transferSend()">
+		                <button type="submit" class="btn btn-success" ng-submit="transferSend()" ng-disabled="!transfer.filenumber">
 		                  Add daily collect
 		                </button>
 		                <input type="checkbox" ng-model="transfer.addcommet"> 
@@ -179,7 +179,7 @@
 	      </table>
 	      </form> -->
 
-	      <h3>Attorney split report</h3>
+<!-- 	      <h3>Attorney split report</h3>
 	         <table class="table table-hover table-condensed" style="margin-top:10px;">
 	          <thead>
 	            <tr style="font-weight: bold">
@@ -224,7 +224,7 @@
 	        </table>
 	      <a href="#/collects">
 	        <button class="btn btn-success">Add attorney report</button>
-	      </a>
+	      </a> -->
 	    </div>
 	  </div>
 </div>

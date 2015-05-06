@@ -9,6 +9,7 @@
  */
 app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $cookies, auth) {
 
+    $scope.uID = $cookies.uID;
     $scope.taxes = $cookies.taxes;
     $scope.partner = $cookies.partner ;
     $scope.type = $cookies.type;

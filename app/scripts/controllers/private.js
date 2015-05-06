@@ -24,6 +24,7 @@ app.controller("PrivateCtrl", function($scope, $firebaseArray, auth, $cookies) {
   };
   // click on `index.html` above to see $remove() and $save() in action
 
+  $scope.uID = $cookies.uID;
   $scope.taxes = $cookies.taxes;
   $scope.partner = $cookies.partner ;
   $scope.type = $cookies.type;

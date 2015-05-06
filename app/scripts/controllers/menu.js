@@ -11,7 +11,7 @@ app.controller('MenuCtrl', function($scope, $cookies, auth, $firebaseArray) {
     // $scope.name='Daniel N.';
     // $scope.uid='b2027ffb0eae211a2aab930af8a7a794';
 
-    $scope.username = $cookies.username;
+    $scope.uID = $cookies.uID;
     $scope.taxes = $cookies.taxes;
     $scope.partner = $cookies.partner ;
     $scope.type = $cookies.type;
