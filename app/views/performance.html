@@ -19,36 +19,11 @@
 	     		<form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
 	     			<div class="form-group">
 	     				<label>Company or person name / File number</label>
-	     			 	<input type="text" class="form-control" ng-model="transfer.nameclient">
-	     			<!-- <p>
-			     	<angucomplete id="client"
-						placeholder="ex. Caja Holdings"
-						pause="400"
-						selectedobject="transfer.nameclient"
-						url="http://apps-lean.com/api/v1/findbyclient/"
-						datafield="data"
-						titlefield="nameclient,filenumber"
-						inputclass="form-control form-control-small"
-						model="transfer.nameclient"
-						required>
-					</p> -->
-					<!-- <p>
-					<label>File number</label>
-					<angucomplete id="case"
-						placeholder="ex. 0000-SS-12345678"
-						pause="400"
-						selectedobject="transfer.filenumber"
-						url="http://apps-lean.com/api/v1/findbycase/"
-						datafield="data"
-						titlefield="filenumber"
-						inputclass="form-control form-control-small"
-						model="transfer.filenumber"
-						required>
-					</p> -->
+	     			 	<input type="text" class="form-control" ng-model="transfer.nameclient" value="{{transfer.nameclient}}" readonly>
 					</div>
 					<div class="form-group">
 	     				<label>File number</label>
-	     			 	<input type="text" class="form-control" ng-model="transfer.filenumber" ng-value="collect.filenumber">
+	     			 	<input type="text" class="form-control" ng-model="transfer.filenumber" ng-value="collect.filenumber" readonly>
 					</div>
 					<div>
 					<label>
@@ -63,13 +38,13 @@
 					</label>
 					</div>
 					<hr ng-show="lawyer.exist==1" >
-			     	<div class="form-group" ng-show="lawyer.exist==1" ><!---->
+			     	<div class="form-group" ng-show="lawyer.exist==1">
 			     		<label>Expenses</label>
 			     		<tags-input ng-model="transfer.expenses" placeholder="Remove expenses">
 			     			<auto-complete source="loadTags($query)"></auto-complete>
 			     		</tags-input>
 			     	</div>
-			     	<div class="form-group" ng-show="lawyer.exist==1" > <!-- -->
+			     	<div class="form-group" ng-show="lawyer.exist==1">
 			     		<label>Expenses amount</label>
 			     		<input type="text" name="fees" ng-model="transfer.fees" class="form-control">
 			     		<small>(separate by commas in order)</small>

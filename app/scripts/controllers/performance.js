@@ -42,15 +42,15 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
     console.log('Error API lawyers');
   });
 
-  $http({ 
-    method: 'GET', 
-    url: 'http://apps-lean.com/api/v1/trusts/'+n 
+  $http({
+    method: 'GET',
+    url: 'http://apps-lean.com/api/v1/trusts/'+n
   })
-  .success(function(data){ 
-    $scope.trusts=data; 
+  .success(function(data){
+    $scope.trusts=data;
   })
-  .error(function(){ 
-    console.log('Error API trusts'); 
+  .error(function(){
+    console.log('Error API trusts');
   });
 
   // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/split/'+n })
@@ -62,29 +62,34 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
     url: 'http://apps-lean.com/api/v1/splits/collect/'+$routeParams.id
   })
   .success(function(data){
-    $scope.transfer.nameclient=data.nameclient;
-    // $scope.collect = angular.toJson(data);
-    console.log(JSON.stringify(data[0].nameclient));
+    // $scope.transfer.nameclient=JSON.stringify(data[0].nameclient);
+    // $scope.transfer.filenumber=JSON.stringify(data[0].filenumber);
+    $scope.transfer.nameclient=data[0].nameclient;
+    $scope.transfer.filenumber=data[0].filenumber;
   })
   .error(function(){
     console.log('Error API splits/collect');
   });
 
   $scope.transferSend = function() {
+    if($scope.lawyer.exist==1) {
+      $scope.transfer.expenses=0;
+    }
     $http({
       method:'POST',
       url:'http://apps-lean.com/api/v1/addDeposit',
       data:$.param($scope.transfer),
       headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
-    })        
+    })
     .success(function(data) {
       console.log('post:',$scope.transfer);
       toaster.pop(data.status, '', data.message, 10000, 'trustedHtml');
       $scope.transfer = {};
       // console.log('success',data);
+      window.location.href='#/main'
     }).error(function(data){
-       toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
-       // console.log('error',data);
+      toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
+      // console.log('error',data);
     });
   };
 
