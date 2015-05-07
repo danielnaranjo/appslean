@@ -54,7 +54,7 @@ app.config(function ($routeProvider) {
         templateUrl: 'views/collects.html',
         controller: 'CollectsCtrl'
       })
-      .when('/report/:uid', {
+      .when('/report/:cid', {
         templateUrl: 'views/report.html',
         controller: 'ReportCtrl'
       })

@@ -26,6 +26,6 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
     })
     .error(function(){
         console.log('Error API lawyers');
-    })
+    });
 
   });

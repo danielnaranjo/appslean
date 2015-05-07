@@ -7,55 +7,69 @@
  * # PerformanceCtrl
  * Controller of the calculatorApp
  */
-app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cookies, $filter, auth, $resource) {
+app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cookies, $filter, auth, $resource, $routeParams) {
 
   //console.log('cookie: ',$cookies);
   $scope.uID = $cookies.uID;
   $scope.taxes = $cookies.taxes;
   $scope.partner = $cookies.partner ;
   $scope.type = $cookies.type;
+
+  $scope.transfer = {};
     
   var d = new Date();
   var n = d.getTime();
 
-  var gastos = $resource('http://apps-lean.com/api/v1/expenses/1');
-  $scope.gastos = [
-    { text: 'Court filling' },
-    { text: 'Copy' },
-    { text: 'FedEx' }
-  ];
+  $http({
+    method: 'GET',
+    url: 'http://apps-lean.com/api/v1/expenses'
+  })
+  .success(function(data){
+    $scope.transfer.expenses=data;
+  })
+  .error(function(){
+    console.log('Error API expenses');
+  });
 
-  $scope.loadTags = function(query){
-    return gastos.query().$promise;
-  };
+  $http({
+    method: 'GET',
+    url: 'http://apps-lean.com/api/v1/lawyers/'+n
+  })
+  .success(function(data){
+    $scope.lawyers=data;
+  })
+  .error(function(){
+    console.log('Error API lawyers');
+  });
 
-  // $http({ 
-  //   method: 'GET', 
-  //   url: 'http://apps-lean.com/api/v1/expenses/'+n 
-  // })
-  // .success(function(data){
-  //   $scope.gastos=data;
-  //   $scope.loadTags = function(query){
-  //     return gastos.query().$promise;
-  //   };
-  // })
-  // .error(function(){
-  //   console.log('Error API expenses');
-  // });
+  $http({ 
+    method: 'GET', 
+    url: 'http://apps-lean.com/api/v1/trusts/'+n 
+  })
+  .success(function(data){ 
+    $scope.trusts=data; 
+  })
+  .error(function(){ 
+    console.log('Error API trusts'); 
+  });
 
-  $http({ method: 'GET',url: 'http://apps-lean.com/api/v1/lawyers/'+n })
-  .success(function(data){ $scope.lawyers=data; })
-  .error(function(){ console.log('Error API lawyers'); });
+  // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/split/'+n })
+  // .success(function(data){ $scope.splits=data; })
+  // .error(function(){ console.log('Error API /splits'); });
 
-  $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/trusts/'+n })
-  .success(function(data){ $scope.trusts=data; })
-  .error(function(){ console.log('Error API trusts'); });
+  $http({
+    method: 'GET',
+    url: 'http://apps-lean.com/api/v1/splits/collect/'+$routeParams.id
+  })
+  .success(function(data){
+    $scope.transfer.nameclient=data.nameclient;
+    // $scope.collect = angular.toJson(data);
+    console.log(JSON.stringify(data[0].nameclient));
+  })
+  .error(function(){
+    console.log('Error API splits/collect');
+  });
 
-  $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/split/'+n })
-  .success(function(data){ $scope.splits=data; })
-  .error(function(){ console.log('Error API trusts'); });
-
-  $scope.transfer = {};
   $scope.transferSend = function() {
     $http({
       method:'POST',
