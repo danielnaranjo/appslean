@@ -12,9 +12,9 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <div class="row" ng-init="push=false">
+      <div class="row" style="margin:2px 2px 0 0;"> <!-- ng-init="push=false" -->
         <div class="col-md-12">
-          <div class="alert alert-warning" role="alert" ng-hide="push">
+          <div class="alert alert-warning" role="alert" ng-show="notification.data">
             <p><strong>Warning!</strong> You deposit ready to split! Click <a href="javascript:;" ng-click="push=true">here</a> to continue</p>
           </div>
         </div>
@@ -30,36 +30,37 @@
         </div> -->
       </div>
 
-      <div class="row" ng-controller="ReportsCtrl" ng-show="push">
+      <!-- notification -->
+      <div class="row" ng-show="push">
         <div class="col-md-12">
           <table class="table table-striped table-hover alert alert-warning">
             <thead>
               <tr>
                 <td><strong>Company/Name</strong></td>
                 <td class="hidden-xs"><strong>File #</strong></td>
-                <td class="hidden-xs"><strong>Payment</strong></td>
                 <td><strong>Amount</strong></td>
                 <td><strong>Last collect</strong></td>
                 <td> </td>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="d in reports.data">
-                <td><a href="#/performance/{{d.cid}}">{{d.nameclient}}</a><span class="visible-xs"><br># {{d.filenumber}}</span></td>
+              <tr ng-repeat="d in notification.data">
+                <td><a href="#/performance/{{d.cID}}">{{d.nameclient}}</a><span class="visible-xs"><br># {{d.filenumber}}</span></td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
-                <td class="hidden-xs">{{d.payment}}</td>
                 <td>{{d.amount|currency}}</td>
                 <td>{{d.date|date}}</td>
-                <td><a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a></td>
+                <td><a href="#/performance/{{d.cID}}"><i class="fa fa-pencil-square-o"></i></a></td>
               </tr>
-                <tr ng-hide="reports.data">
-                  <td colspan="7">Loading data..</td>
-                </tr>
+              <tr ng-hide="notification.data">
+                <td colspan="7">Loading data..</td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
+      <!-- notification -->
 
+      <!-- last splits by lawyer -->
       <div class="row" ng-controller="ReportsCtrl">
         <div class="col-md-12">
           <table class="table table-striped table-hover">
@@ -67,7 +68,7 @@
               <tr>
                 <td><strong>Company/Name</strong></td>
                 <td class="hidden-xs"><strong>File #</strong></td>
-                <td class="hidden-xs"><strong>Payment</strong></td>
+                <!-- <td class="hidden-xs"><strong>Payment</strong></td> -->
                 <td><strong>Amount</strong></td>
                 <td><strong>Last split</strong></td>
                 <td> </td>
@@ -77,7 +78,7 @@
               <tr ng-repeat="d in reports.data | limitTo:5">
                 <td>{{d.nameclient}}<span class="visible-xs"><br># {{d.filenumber}}</span></td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
-                <td class="hidden-xs">{{d.payment}}</td>
+                <!-- <td class="hidden-xs">{{d.payment}}</td> -->
                 <td>{{d.amount|currency}}</td>
                 <td>{{d.date|date}}</td>
                 <td><a href="#/report/{{d.cid}}"><i class="glyphicon glyphicon-search"></i></a></td>
@@ -94,6 +95,7 @@
           </table>
         </div>
       </div>
+      <!-- last splits by lawyer -->
     </div>
   </div>
 </div>

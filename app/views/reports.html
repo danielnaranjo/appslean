@@ -20,18 +20,18 @@
 	            <tr style="font-weight:bold;">
 	              <td>Company or Person Name</td>
 	              <td>File #</td>
-	              <td>Payment Method</td>
 	              <td>Amount</td>
 	              <td>Split fee</td>
+	              <td>Accont</td>
 	            </tr>
 	          </thead>
 	          <tbody>
 	            <tr ng-repeat="r in reports.data">
 	              <td>{{r.nameclient}}</td>
 	              <td>{{r.filenumber}}</td>
-	              <td>{{r.payment}}</td>
 	              <td>{{r.amount|currency}}</td>
 	              <td>{{r.amount|currency}}</td>
+	              <td>{{r.trusts}}</td>
 	            </tr>
 	          </tbody>
 	          <tfoot>
@@ -44,8 +44,7 @@
 	            </tr>
 	 	        <tr>
 	              <td></td>
-	              <td></td>
-	              <td><strong>Splits & Expenses Amount</strong></td>
+	              <td colspan="2"><strong>Splits & Expenses Amount</strong></td>
 	              <td>{{reports.data|sumByKey:'amount'|currency}} ({{reports.data.length}})</td>
 	              <td></td>
 	            </tr>

@@ -19,11 +19,11 @@ app.controller('ReportCtrl', function ($scope, $http, Data, auth, $cookies, $rou
     var n = d.getTime();
     $http({
         method:'GET',
-        url:'http://apps-lean.com/api/v1/splits/split/'+$routeParams.cid
+        url:'http://apps-lean.com/api/v1//lawyer/splitbyid/'+$routeParams.cid
     })
     .success(function(data){
         $scope.reports=data;
-        console.log($routeParams.cid);
+        //console.log($routeParams.cid);
     })
     .error(function(){
         console.log('Error API lawyers');

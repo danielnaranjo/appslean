@@ -20,6 +20,7 @@ var app = angular.module('calculatorApp', [
     'ui.bootstrap',
     'firebase',
     'ngTagsInput',
+    'angular-loading-bar',
     // "angucomplete",
     'xeditable'
   ]);

@@ -19,7 +19,7 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies) {
     var n = d.getTime();
     $http({
         method:'GET',
-        url:'http://apps-lean.com/api/v1/report/'+$cookies.uID
+        url:'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID
     })
     .success(function(data){
         $scope.reports=data;

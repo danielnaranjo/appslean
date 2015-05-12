@@ -16,20 +16,31 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
   $scope.type = $cookies.type;
 
   $scope.transfer = {};
+  // initial values
+  $scope.transfer.expenses=0;
+  $scope.transfer.others=0;
     
   var d = new Date();
   var n = d.getTime();
 
-  $http({
-    method: 'GET',
-    url: 'http://apps-lean.com/api/v1/expenses'
-  })
-  .success(function(data){
-    $scope.transfer.expenses=data;
-  })
-  .error(function(){
-    console.log('Error API expenses');
-  });
+  $scope.change = function() {
+    // $scope.transfer.exists==1;
+    $http({
+      method: 'GET',
+      url: 'http://apps-lean.com/api/v1/expenses'
+    })
+    .success(function(data){
+      $scope.transfer.expenses=data;
+    })
+    .error(function(){
+      console.log('Error API expenses');
+    });
+  };
+
+  if($scope.transfer.exists==0) {
+    $scope.transfer.expenses==0;
+    console.log('Remove expenses');
+  }
 
   $http({
     method: 'GET',
@@ -59,21 +70,24 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
 
   $http({
     method: 'GET',
-    url: 'http://apps-lean.com/api/v1/splits/collect/'+$routeParams.id
+    url: 'http://apps-lean.com/api/v1/lawyer/splits/collect/'+$routeParams.id
   })
   .success(function(data){
-    // $scope.transfer.nameclient=JSON.stringify(data[0].nameclient);
-    // $scope.transfer.filenumber=JSON.stringify(data[0].filenumber);
+    $scope.transfer.cID=$routeParams.id;
     $scope.transfer.nameclient=data[0].nameclient;
     $scope.transfer.filenumber=data[0].filenumber;
+    $scope.transfer.lawyer=data[0].lawyer;
+    $scope.transfer.amount=data[0].amount;
+    $scope.transfer.trusts=data[0].account;
   })
   .error(function(){
     console.log('Error API splits/collect');
   });
 
   $scope.transferSend = function() {
-    if($scope.lawyer.exist==1) {
+    if($scope.transfer.exist==0) {
       $scope.transfer.expenses=0;
+      $scope.transfer.fees=0;
     }
     $http({
       method:'POST',
@@ -82,14 +96,12 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
       headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     .success(function(data) {
-      console.log('post:',$scope.transfer);
+      console.log('post:',JSON.stringify($scope.transfer));
       toaster.pop(data.status, '', data.message, 10000, 'trustedHtml');
       $scope.transfer = {};
-      // console.log('success',data);
       window.location.href='#/main'
     }).error(function(data){
       toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
-      // console.log('error',data);
     });
   };
 

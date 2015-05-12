@@ -13,6 +13,26 @@ app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $c
     $scope.taxes = $cookies.taxes;
     $scope.partner = $cookies.partner ;
     $scope.type = $cookies.type;
+
+    // $scope.push=false; 
+    // console.log($scope.push);
+
+    var d = new Date();
+    var n = d.getTime();
+    $http({
+        method:'GET',
+        url:'http://apps-lean.com/api/v1/lawyer/push/'+$cookies.uID
+    })
+    .success(function(data){
+        $scope.notification=data;
+        if(data) {
+            $scope.push=false; 
+            console.log($scope.push);
+        }
+    })
+    .error(function(){
+        console.log('Error API lawyers/push');
+    });
   
     // $http({ method: 'GET', url: 'http://apps-lean.com/api/v1/charts/1' })
     // .success(function(data){ $scope.chart1=data; })
