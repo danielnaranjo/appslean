@@ -16,6 +16,7 @@ var app = angular.module('calculatorApp', [
     'ngSanitize',
     'ngTouch',
     'googlechart',
+    'stpa.morris',
     'toaster',
     'ui.bootstrap',
     'firebase',
@@ -66,6 +67,10 @@ app.config(function ($routeProvider) {
       .when('/performance/:id', {
         templateUrl: 'views/performance.html',
         controller: 'PerformanceCtrl'
+      })
+      .when('/settings', {
+        templateUrl: 'views/settings.html',
+        controller: 'SettingsCtrl'
       })
       .otherwise({
         redirectTo: '/login'

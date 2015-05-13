@@ -1,0 +1,62 @@
+<div class="row hidden-xs">
+  <div class="col-md-12 line">
+    <div class="row">
+      <div class="col-md-11 col-sm-10">Account > Settings > Password</div>
+      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-href="#/logout" class="logout">Logout</a></div>
+    </div>
+  </div>
+</div>
+<div class="dashboard">
+  <div class="row">
+    <div class="col-md-3 col-sm-3 hidden-xs">
+      <menu></menu>
+    </div>
+    <div class="col-md-9 col-sm-9 col-xs-12">
+      <div class="row">
+      	<div class="col-md-6">
+      		<form class="form" role="form" ng-submit="updateProfile()">
+      			<h3>Personal Information</h3>
+      			<div class="form-group">
+      				<label>Name</label>
+      				<input type="text" class="form-control" ng-model="attorney.name" value="{{attorney.name}}">
+      			</div>
+      			<div class="form-group">
+      				<label>Lastname</label>
+      				<input type="text" class="form-control" ng-model="attorney.lastname" value="{{attorney.lastname}}">
+      			</div>
+      			<div class="form-group">
+      				<label>E-mail</label>
+      				<input type="text" class="form-control" ng-model="attorney.email" value="{{attorney.email}}">
+      			</div>
+      			<div class="form-group">
+      				<label>Phone</label>
+      				<input type="text" class="form-control" ng-model="attorney.phone" value="{{attorney.phone}}">
+      			</div>
+      			<div class="form-group">
+      				<label>Phone</label>
+      				<input type="text" class="form-control" ng-model="attorney.phone" value="{{attorney.phone}}">
+      			</div>
+      			<button class="btn btn-default" ng-submit="updateProfile()" disabled>
+      				Update info
+      			</button>
+      			{{attorney}}
+      		</form>
+      	</div>
+        <div class="col-md-6">      
+	        <h3>Password modification</h3>
+	        <form name="cpForm" ng-submit="updateProfile()" method="post" >
+	        	<input type="hidden" name="cID" ng-model="cpass.cID">
+	          <div class="form-group has-feedback">
+	          	<label>New password</label>
+	            <input class="form-control input-lg" type="password" name="password" ng-model="cpass.password" placeholder="Password" required>
+	            <span class="ion-key form-control-feedback"></span>
+	          </div>
+	          <button type="submit" data-ng-disabled="cpForm.$invalid" class="btn btn-primary" ng-click="updateProfile(password)">Update</button>
+	          <small>Tech support, click <a href="mailto:info@apps-lean.com?subject=Problem with password change&body=Username/email:">here</a></small>
+	        </form>
+	        {{cpass}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

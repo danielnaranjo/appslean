@@ -12,6 +12,11 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
+      <!-- <div class="row">
+        <div class="col-md-4">
+          <div donut-chart donut-data='[{label: "JN", value: 71.5},{label: "FIRM",value: 38.5},]'></div>
+        </div>
+      </div> -->
       <div class="row" style="min-height:300px;">
         <h3>Attorney split report</h3>
          <table class="table table-hover table-condensed" style="margin-top:10px;">
@@ -33,7 +38,7 @@
               <td>{{s.filenumber}}</td>
               <td>{{s.amount|currency}}</td>
               <td style="border-left:5px solid #666">
-                <li style="margin:0;padding:5px;list-style:none;">Not set</li>
+                <li ng-show="s.money" ng-repeat="mo in s.money" style="margin:0;padding:5px;list-style:none;">{{mo}}</li>
               </td>
               <td>
                 <li ng-show="s.split" ng-repeat="law in s.split track by $index" style="margin:0;padding:5px;list-style:none;">
@@ -44,17 +49,22 @@
                 <span ng-show="s.expenses>0" ng-repeat="e in s.expenses" style="margin-right:5px;padding:5px;background-color:#f00;">
                   {{e}}
                 </span>
+                <span ng-show="s.expenses">None</span>
               </td>
               <td>
                 <span ng-show="s.fees>0" ng-repeat="f in s.fees" style="margin-right:5px;padding:5px;">
                   {{f|currency}}
                 </span>
+                <span ng-show="s.expenses">0</span>
               </td>
-              <td>{{s.comments}}</td>
+              <td>
+                {{s.comments}}
+                <span ng-hide="s.comments">No comment</span>
+              </td>
             </tr>
             <tr>
               <td colspan="9" ng-hide="reports">
-                <h3>No data available</h3>
+                <h3>Loading..</h3>
               </td>
             </tr>
           </tbody>

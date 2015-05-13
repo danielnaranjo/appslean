@@ -22,30 +22,43 @@
 	              <td>File #</td>
 	              <td>Amount</td>
 	              <td>Split fee</td>
-	              <td>Accont</td>
+	              <td>Date</td>
 	            </tr>
 	          </thead>
 	          <tbody>
-	            <tr ng-repeat="r in reports.data">
-	              <td>{{r.nameclient}}</td>
+	            <tr ng-repeat="r in reports.data" ng-show="reports.data">
+	              <td>
+	              	<a href="#/report/{{r.cid}}">{{r.nameclient}}</a>
+	              	</td>
 	              <td>{{r.filenumber}}</td>
 	              <td>{{r.amount|currency}}</td>
-	              <td>{{r.amount|currency}}</td>
-	              <td>{{r.trusts}}</td>
+	              <td>{{r.money|currency}}</td>
+	              <td>{{r.date|date}}</td>
+	              <td>
+	              	<a href="#/report/{{r.cid}}"><i class="glyphicon glyphicon-search"></i></a>
+	              </td>
+	            </tr>
+	            <tr ng-hide="reports.data">
+	            	<td colspan="6">
+	            		<h3>Loading..</h3>
+	            	</td>
 	            </tr>
 	          </tbody>
-	          <tfoot>
+	          <tfoot ng-show="reports.data">
 	            <tr>
 	              <td></td>
 	              <td><strong>Totals</strong></td>
 	              <td><strong>Trust Amount</strong></td>
 	              <td>{{reports.data|sumByKey:'amount'|currency}}</td>
 	              <td></td>
+	              <td></td>
 	            </tr>
 	 	        <tr>
 	              <td></td>
-	              <td colspan="2"><strong>Splits & Expenses Amount</strong></td>
-	              <td>{{reports.data|sumByKey:'amount'|currency}} ({{reports.data.length}})</td>
+	              <td></td>
+	              <td><strong>Splits Amount</strong></td>
+	              <td>{{reports.data|sumByKey:'money'|currency}} ({{reports.data.length}})</td>
+	              <td></td>
 	              <td></td>
 	            </tr>
 	          </tfoot>
