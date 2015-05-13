@@ -1,26 +1,45 @@
 <ul ng-controller="MenuCtrl">
     <li>
-        <a ng-href="#/main">Dashboad</a>
+        <a ng-href="#/main">
+            <span class="hidden-xs">Dashboad</span>
+            <span class="visible-xs">
+                <i class="fa fa-home fa-2x"></i>
+            </span>
+        </a>
     </li>
-    <!-- <li ng-show="partner!=1">
-        <a ng-href="#/performance">Daily performance</a>
-    </li> -->
     <li ng-show="partner==1">
         <a ng-href="#/collects">Collects & Deposits</a>
     </li>
     <li ng-show="partner==1">
-        <a ng-href="#/lawyers">Attorney</a>
+        <a ng-href="#/lawyers">
+            Attorney
+        </a>
     </li>
     <li>
-        <a ng-href="#/reports">Reports</a>
+        <a ng-href="#/reports">
+            <span class="hidden-xs">Reports</span>
+            <span class="visible-xs">
+                <i class="fa fa-bar-chart fa-2x"></i>
+            </span>
+        </a>
     </li>
     <li>
-        <a ng-href="#/settings">Settings</a>
+        <a ng-href="#/settings">
+            <span class="hidden-xs">Settings</span>
+            <span class="visible-xs">
+                <i class="fa fa-cog fa-2x"></i>
+            </span>
+        </a>
     </li>
     <li ng-show="partner==1">
         <a ng-href="#/private">Changelog</a>
     </li>
     <li>
-        <a ng-href="#/logout" class="logout">Logout</a>
+        <a ng-href="#/logout" class="logout">
+            <span class="hidden-xs">Logout</span>
+            <span class="visible-xs">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </span>
+        </a>
     </li>
 </ul>

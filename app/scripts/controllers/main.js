@@ -25,8 +25,8 @@ app.controller('MainCtrl', function ($scope, $http, $location, $window, Data, $c
     })
     .success(function(data){
         $scope.notification=data;
-        if(data) {
-            $scope.push=false; 
+        if(data>0) {
+            $scope.push=false;
             console.log($scope.push);
         }
     })
