@@ -18,24 +18,28 @@
         </div>
       </div> -->
       <div class="row" style="min-height:300px;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
         <h3>Attorney split report</h3>
          <table class="table table-hover table-condensed" style="margin-top:10px;">
           <thead>
             <tr style="font-weight: bold">
               <td style="width:150px">Company or person name</td>
-              <td style="width:150px">File #</td>
+              <td style="width:150px" class="hidden-xs">File #</td>
               <td>Amount</td>
               <td>Split fees</td>
               <td>Splits / Lawyers</td>
-              <td>Expenses</td>
-              <td>Amounts</td>
+              <td class="hidden-xs">Expenses</td>
+              <td class="hidden-xs">Amounts</td>
               <td style="width:140px">Comments</td>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="s in reports.data">
-              <td>{{s.nameclient}}</td>
-              <td>{{s.filenumber}}</td>
+              <td>
+                {{s.nameclient}}
+                <span class="visible-xs"><br/>{{r.filenumber}}</span>
+              </td>
+              <td class="hidden-xs">{{s.filenumber}}</td>
               <td>{{s.amount|currency}}</td>
               <td style="border-left:5px solid #666">
                 <li ng-show="s.money" ng-repeat="mo in s.money" style="margin:0;padding:5px;list-style:none;">{{mo}}</li>
@@ -45,13 +49,13 @@
                   {{law}}
                 </li>
               </td>
-              <td>
+              <td class="hidden-xs">
                 <span ng-show="s.expenses>0" ng-repeat="e in s.expenses" style="margin-right:5px;padding:5px;background-color:#f00;">
                   {{e}}
                 </span>
                 <span ng-show="s.expenses">None</span>
               </td>
-              <td>
+              <td class="hidden-xs">
                 <span ng-show="s.fees>0" ng-repeat="f in s.fees" style="margin-right:5px;padding:5px;">
                   {{f|currency}}
                 </span>
@@ -69,31 +73,10 @@
             </tr>
           </tbody>
         </table>
-<!--         <table class="table table-striped table-hover">
-          <thead>
-            <tr style="font-weight:bold;">
-              <td>Company or Person Name</td>
-              <td>File #</td>
-              <td>Payment Method</td>
-              <td>Amount Deposited</td>
-              <td>Account</td>
-              <td>%</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="r in reports.data">
-              <td>{{r.nameclient}}</td>
-              <td>{{r.filenumber}}</td>
-              <td>{{r.payment}}</td>
-              <td>{{r.amount|currency}}</td>
-              <td>{{r.account}}</td>
-              <td>%</td>
-            </tr>
-          </tbody>
-        </table> -->
+        <div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <a href="#/main">Back to dashboard</a>
         </div>
       </div>

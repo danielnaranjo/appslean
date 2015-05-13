@@ -8,27 +8,20 @@
  * Controller of the calculatorApp
  */
 app.controller('SettingsCtrl', function ($scope, $http, auth, Data, toaster, $cookies, $routeParams) {
-
-
-  	$scope.attorney = {};
+    $scope.attorney = {};
     $http({
         method:'GET',
         url:'http://apps-lean.com/api/v1/lawyer/'+$cookies.uID
     })
     .success(function(data){
-    	$scope.attorney=data;
-        $scope.attorney.name=data[0].name;
-	    $scope.attorney.middle=data[0].middle;
-	    $scope.attorney.lastname=data[0].lastname;
-	    $scope.attorney.email=data[0].email;
-	    $scope.attorney.address=data[0].address;
+        $scope.attorney=data;
     })
     .error(function(){
         console.log('Error API lawyer/single');
     });
 
 	$scope.cpass = {};
-	$scope.cpass.uid=$cookies.uID;
+	$scope.cpass.uID=$cookies.uID;
     $scope.updateProfile = function() {
         $http({
             method:'POST',
@@ -43,6 +36,7 @@ app.controller('SettingsCtrl', function ($scope, $http, auth, Data, toaster, $co
             } 
             if(data.status==='error') {
                 toaster.pop('error', '', 'Something is wrong', 3000, 'trustedHtml');
+                console.log('error', data);
             }
         }).error(function(data){
             toaster.pop('error', '', 'Error we can not complete this action', 5000, 'trustedHtml');

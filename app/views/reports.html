@@ -13,28 +13,30 @@
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
         	<h3>General report</h3>
         	<table class="table table-striped table-hover">
 	          <thead>
 	            <tr style="font-weight:bold;">
 	              <td>Company or Person Name</td>
-	              <td>File #</td>
+	              <td class="hidden-xs">File #</td>
 	              <td>Amount</td>
 	              <td>Split fee</td>
 	              <td>Date</td>
+	              <td class="hidden-xs"></td>
 	            </tr>
 	          </thead>
 	          <tbody>
 	            <tr ng-repeat="r in reports.data" ng-show="reports.data">
 	              <td>
 	              	<a href="#/report/{{r.cid}}">{{r.nameclient}}</a>
-	              	</td>
-	              <td>{{r.filenumber}}</td>
+	              	<span class="visible-xs"><br/>{{r.filenumber}}</span>
+	              </td>
+	              <td class="hidden-xs">{{r.filenumber}}</td>
 	              <td>{{r.amount|currency}}</td>
 	              <td>{{r.money|currency}}</td>
 	              <td>{{r.date|date}}</td>
-	              <td>
+	              <td class="hidden-xs">
 	              	<a href="#/report/{{r.cid}}"><i class="glyphicon glyphicon-search"></i></a>
 	              </td>
 	            </tr>
@@ -51,7 +53,7 @@
 	              <td><strong>Trust Amount</strong></td>
 	              <td>{{reports.data|sumByKey:'amount'|currency}}</td>
 	              <td></td>
-	              <td></td>
+	              <td class="hidden-xs"></td>
 	            </tr>
 	 	        <tr>
 	              <td></td>
@@ -59,7 +61,7 @@
 	              <td><strong>Splits Amount</strong></td>
 	              <td>{{reports.data|sumByKey:'money'|currency}} ({{reports.data.length}})</td>
 	              <td></td>
-	              <td></td>
+	              <td class="hidden-xs"></td>
 	            </tr>
 	          </tfoot>
 	        </table>
