@@ -15,7 +15,8 @@
       <div class="row" style="margin:2px 2px 0 0;"> <!-- ng-init="push=false" -->
         <div class="col-md-12">
           <div class="alert alert-warning" role="alert" ng-hide="notification.data==0 || push==true">
-            <p><strong>Warning!</strong> You deposit ready to split! Click <a href="javascript:;" ng-click="push=true">here</a> to continue</p>
+              <h5>You deposit ready to split!
+              <button ng-click="push=true" class="btn btn-warning">Click to continue</button></h5> 
           </div>
         </div>
       </div>
@@ -81,16 +82,15 @@
                 <!-- <td class="hidden-xs">{{d.payment}}</td> -->
                 <td>{{d.amount|currency}}</td>
                 <td>{{d.date|date}}</td>
-                <td><a href="#/report/{{d.cid}}"><i class="glyphicon glyphicon-search"></i></a></td>
+                <td>
+                  <a href="#/report/{{d.cid}}">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </a>
+                </td>
               </tr>
-                <tr ng-hide="reports.data">
-                  <td colspan="6">Loading data..</td>
-                </tr>
-                <!-- <tr ng-show="reports.data==0">
-                  <td colspan="6">
-                    <h3>No data available.</h3>
-                  </td>
-                </tr> -->
+              <tr ng-hide="reports.data">
+                <td colspan="5">Loading data..</td>
+              </tr>
             </tbody>
           </table>
         </div>
