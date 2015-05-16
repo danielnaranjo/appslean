@@ -14,7 +14,8 @@
     <div class="col-md-9 col-sm-9 col-xs-12">
       <div class="row">
       	<div class="col-md-6">
-      		<form class="form" role="form" ng-submit="updateProfile()" ng-repeat="a in attorney.data">
+          <h3 ng-hide="attorney.data">Loading...</h3>
+      		<form class="form" role="form" ng-submit="updateProfile()" ng-repeat="a in attorney.data" ng-show="attorney.data">
       			<h3>Personal Information</h3>
       			<div class="form-group">
       				<label>Name</label>
