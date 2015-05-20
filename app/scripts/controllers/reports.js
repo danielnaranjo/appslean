@@ -18,10 +18,10 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     // Get data with or without Lawyer's ID
     if($cookies.partner==0) {
         URL = 'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID;
-        console.log(URL);
+        // console.log(URL);
     } else {
         URL = 'http://apps-lean.com/api/v1/allsplits';
-        console.log(URL);
+        // console.log(URL);
     }
   
     var d = new Date();
@@ -32,7 +32,7 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     })
     .success(function(data){
         $scope.reports=data;
-        console.log(data);
+        console.log('report',data);
     })
     .error(function(){
         console.log('Error API lawyers');
@@ -64,6 +64,39 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
         $window.location.reload();
         // $route.reload();
     };
-//
-//
+
+    $scope.firm = {};
+
+    $scope.executeFirm = function() {
+        $http({
+            method: 'POST',
+            url: 'http://apps-lean.com/api/v1/reportbylawyer',
+            data:$.param($scope.firm),
+            headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .success(function(data){
+            $scope.bylawyers=data;
+        })
+        .error(function(){
+            console.log('Error API bylawyers');
+        });
+    };
+    
+    $scope.trust = {};
+    $scope.executeTrusts = function() {
+        $http({
+            method: 'POST',
+            url: 'http://apps-lean.com/api/v1/reportbytrusts',
+            data:$.param($scope.trust),
+            headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .success(function(data){
+            $scope.bytrust=data;
+        })
+        .error(function(){
+            console.log('Error API bytrust');
+        });
+    };
+
+
   });

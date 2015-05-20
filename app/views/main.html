@@ -67,7 +67,7 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <td><strong>Attorney</strong></td>
+                <td ng-show="partner==1"><strong>Attorney</strong></td>
                 <td><strong>Company/Name</strong></td>
                 <td class="hidden-xs"><strong>File #</strong></td>
                 <!-- <td class="hidden-xs"><strong>Payment</strong></td> -->
@@ -78,7 +78,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="d in reports.data | limitTo:5">
-                <td>{{d.attorney}}</td>
+                <td ng-show="partner==1">{{d.attorney}}</td>
                 <td>{{d.nameclient}}<span class="visible-xs"><br># {{d.filenumber}}</span></td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
                 <!-- <td class="hidden-xs">{{d.payment}}</td> -->
