@@ -55,6 +55,7 @@
 	            <tr style="font-weight:bold;">
 	              <td>Company or Person Name</td>
 	              <td class="hidden-xs">File #</td>
+	              <td>Attorney</td>
 	              <td>Amount</td>
 	              <td>Split fee</td>
 	              <td>Date</td>
@@ -68,6 +69,7 @@
 	              	<span class="visible-xs"><br/>{{r.filenumber}}</span>
 	              </td>
 	              <td class="hidden-xs">{{r.filenumber}}</td>
+	              <td>{{r.attorney}}</td>
 	              <td>{{r.amount|currency}}</td>
 	              <td>{{r.money|currency}}</td>
 	              <td>{{r.date|date}}</td>
@@ -117,6 +119,7 @@
 	            <tr style="font-weight:bold;">
 	              <td>Company or Person Name</td>
 	              <td class="hidden-xs">File #</td>
+	              <td>Attorney</td>
 	              <td>Amount</td>
 	              <td>Split fee</td>
 	              <td>Date</td>
@@ -130,6 +133,7 @@
 	              	<span class="visible-xs"><br/>{{r.filenumber}}</span>
 	              </td>
 	              <td class="hidden-xs">{{r.filenumber}}</td>
+	              <td>{{r.attorney}}</td>
 	              <td>{{r.amount|currency}}</td>
 	              <td>{{r.money|currency}}</td>
 	              <td>{{r.date|date}}</td>
@@ -144,7 +148,7 @@
 	            </tr>
 	            <tr ng-show="range.data==0">
 	            	<td colspan="6">
-	            		<h3>There is not data to display</h3>
+	            		<h3>No data</h3>
 	            		<!-- <p>
 	            			<button ng-click="refresh()" class="btn btn-warning">
 	            				<i class="fa fa-refresh"></i> Try again

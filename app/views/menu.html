@@ -7,12 +7,20 @@
             </span>
         </a>
     </li>
-    <li ng-show="partner==1">
-        <a ng-href="#/collects">Collects & Deposits</a>
+    <li ng-show="partner==1" class="hidden-xs">
+        <a ng-href="#/collects">
+            <span class="hidden-xs">Collects & Deposits</span>
+            <span class="visible-xs">
+                <i class="fa fa-money fa-2x"></i>
+            </span>
+        </a>
     </li>
     <li ng-show="partner==1">
         <a ng-href="#/lawyers">
-            Attorney
+            <span class="hidden-xs">Attorney</span>
+            <span class="visible-xs">
+                <i class="fa fa-users fa-2x"></i>
+            </span>
         </a>
     </li>
     <li>
@@ -31,7 +39,7 @@
             </span>
         </a>
     </li>
-    <li ng-show="partner==1">
+    <li ng-show="partner==1" class="hidden-xs">
         <a ng-href="#/private">Changelog</a>
     </li>
     <li>

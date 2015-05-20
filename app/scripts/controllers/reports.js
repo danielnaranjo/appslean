@@ -14,15 +14,25 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     $scope.taxes = $cookies.taxes;
 	$scope.partner = $cookies.partner;
 	$scope.type = $cookies.type;
+    var URL="";
+    // Get data with or without Lawyer's ID
+    if($cookies.partner==0) {
+        URL = 'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID;
+        console.log(URL);
+    } else {
+        URL = 'http://apps-lean.com/api/v1/allsplits';
+        console.log(URL);
+    }
   
     var d = new Date();
     var n = d.getTime();
     $http({
         method:'GET',
-        url:'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID
+        url: URL //'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID
     })
     .success(function(data){
         $scope.reports=data;
+        console.log(data);
     })
     .error(function(){
         console.log('Error API lawyers');
@@ -33,6 +43,7 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     $scope.filter.uID=$cookies.uID;
     // $scope.filter.in= new Date();//'04/01/2015T04:30:00.000Z'
     // $scope.filter.out= new Date();//'30/01/2015T04:30:00.000Z'
+
     $scope.execute = function() {
         $http({
             method:'POST',

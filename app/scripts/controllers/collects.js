@@ -34,6 +34,14 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies,
   .success(function(data){ $scope.incomes=data; })
   .error(function(){ console.log('Error API trusts'); });
 
+  $http({ method: 'GET',url: 'http://apps-lean.com/api/v1/collects' })
+  .success(function(data){
+    $scope.deposits=data;
+  })
+  .error(function(){
+    console.log('Error API collects');
+  });
+
 	$scope.collects = {};
     $scope.processSend = function() {
 		$http({

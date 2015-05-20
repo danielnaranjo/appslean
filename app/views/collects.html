@@ -101,8 +101,8 @@
           </table>
           <!-- {{collects}} -->
           </form>
-          <h3>Last 5 collects</h3>
-          <table class="table table-striped table-hover" ng-controller="ReportsCtrl">
+          <h3>Last 10 collects</h3>
+          <table class="table table-striped table-hover"> <!-- ng-controller="ReportsCtrl" -->
             <thead>
               <tr>
                 <td><strong>Attorney</strong></td>
@@ -115,18 +115,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="d in reports.data | limitTo:5">
+              <tr ng-repeat="d in deposits.data | limitTo:10">
                 <td class="capitalize">{{d.name}} {{d.lastname}}</td>
                 <td class="hidden-xs">{{d.nameclient}}</td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
-                <td class="hidden-xs">{{d.payment}}</td>
+                <td class="hidden-xs">{{d.date|date}}</td>
                 <td>{{d.amount|currency}}</td>
-                <td>{{d.date|date}}</td>
-                <td><a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a></td>
+                <td>{{d.payment}}</td>
+                <td><!-- <a href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a> --></td>
               </tr>
-                <tr ng-hide="reports.data">
-                  <td colspan="7">Loading data..</td>
-                </tr>
+              <tr ng-hide="deposits.data">
+                <td colspan="7">Loading data..</td>
+              </tr>
+              <tr ng-show="deposits.data==0">
+                <td colspan="7">No data</td>
+              </tr>
             </tbody>
           </table>
         </div>

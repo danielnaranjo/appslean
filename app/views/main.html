@@ -12,7 +12,7 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <div class="row" style="margin:2px 2px 0 0;"> <!-- ng-init="push=false" -->
+      <div class="row" style="margin:2px 2px 0 0;" ng-show="partner==0"> <!-- ng-init="push=false" -->
         <div class="col-md-12">
           <div class="alert alert-warning" role="alert" ng-hide="notification.data==0 || push==true">
               <h5>You deposit ready to split!
@@ -32,7 +32,7 @@
       </div>
 
       <!-- notification -->
-      <div class="row" ng-show="push">
+      <div class="row" ng-show="push && partner==0">
         <div class="col-md-12">
           <table class="table table-striped table-hover alert alert-warning">
             <thead>
@@ -67,6 +67,7 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
+                <td><strong>Attorney</strong></td>
                 <td><strong>Company/Name</strong></td>
                 <td class="hidden-xs"><strong>File #</strong></td>
                 <!-- <td class="hidden-xs"><strong>Payment</strong></td> -->
@@ -77,6 +78,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="d in reports.data | limitTo:5">
+                <td>{{d.attorney}}</td>
                 <td>{{d.nameclient}}<span class="visible-xs"><br># {{d.filenumber}}</span></td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
                 <!-- <td class="hidden-xs">{{d.payment}}</td> -->
@@ -89,7 +91,10 @@
                 </td>
               </tr>
               <tr ng-hide="reports.data">
-                <td colspan="5">Loading data..</td>
+                <td colspan="5"><h3>Loading data..</h3></td>
+              </tr>
+              <tr ng-show="reports.data==0">
+                <td colspan="5"><h3>No data</h3></td>
               </tr>
             </tbody>
           </table>
