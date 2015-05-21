@@ -45,7 +45,7 @@
 					        <div class="col-md-5 col-sm-5 col-xs-5" ng-show="partner==1" ng-controller="LawyersCtrl">
 					        	<p>
 					        		<select class="form-control" name="lawyer" ng-model="filter.lawyer">
-					                    <option value="">Attorney</option>
+					                    <option value="">Attorney (optional)</option>
 					                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
 					                      {{d.name}} {{d.lastname}}
 					                    </option>
