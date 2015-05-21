@@ -34,16 +34,19 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies,
   .success(function(data){ $scope.incomes=data; })
   .error(function(){ console.log('Error API trusts'); });
 
-  $http({ method: 'GET',url: 'http://apps-lean.com/api/v1/collects' })
-  .success(function(data){
-    $scope.deposits=data;
-  })
-  .error(function(){
-    console.log('Error API collects');
-  });
+  $scope.getCollects = function() {
+    $http({ method: 'GET',url: 'http://apps-lean.com/api/v1/collects' })
+    .success(function(data){
+      $scope.deposits=data;
+    })
+    .error(function(){
+      console.log('Error API collects');
+    });
+  };
 
 	$scope.collects = {};
-    $scope.processSend = function() {
+  // $scope.collects.date=$filter('date')(d, 'MM/dd/yyyy'); //lastWeekUnformatted;
+  $scope.processSend = function() {
 		$http({
 			method:'POST',
 			url:'http://apps-lean.com/api/v1/addCollect',
@@ -51,14 +54,19 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies,
 			headers:{ 'Content-Type': 'application/x-www-form-urlencoded' }
 		})        
 		.success(function(data) {
-        console.log('post',$scope.collects); 
+        //console.log('post',$scope.collects);
         toaster.pop(data.status, '', data.message, 10000, 'trustedHtml');
         $scope.collects = {};
+        $scope.getCollects();
         }).error(function(data){
         	 toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
+           //console.log('error',data);
         });
 	};
 
+// 
+
+//
   });
 
 

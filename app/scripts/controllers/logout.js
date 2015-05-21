@@ -15,7 +15,7 @@ app.controller('LogoutCtrl', function ($scope, $cookieStore, $location, toaster)
     $cookieStore.remove('name');
     $cookieStore.remove('username');
     $cookieStore.remove('password');
-    toaster.pop('sucess', '', 'Session closed', 10000, 'trustedHtml');
+    toaster.pop('info', '', 'Session closed', 2000, 'trustedHtml');
     console.log('Session closed and cookie deleted!');
     //mandamos al login
     $location.path('/login');

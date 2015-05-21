@@ -32,12 +32,25 @@
 			        			<h4>Filter by date</h4>
 			        		</div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="filter.in" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="filter.in" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="filter.in" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="filter.in" required>
 					        </div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="filter.out" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="filter.out" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="filter.out" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="filter.out" required>
+					        </div>
+					        <div class="col-md-12 col-sm-10 col-xs-10" ng-show="partner==1" >
+			        			<h4>Filter by attorney</h4>
+			        		</div>
+					        <div class="col-md-5 col-sm-5 col-xs-5" ng-show="partner==1" ng-controller="LawyersCtrl">
+					        	<p>
+					        		<select class="form-control" name="lawyer" ng-model="filter.lawyer">
+					                    <option value="">Attorney</option>
+					                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+					                      {{d.name}} {{d.lastname}}
+					                    </option>
+					                </select>
+					        	</p>
 					        </div>
 					        <div class="col-md-12 col-sm-10 col-xs-10">
 					        	<p> </p>
@@ -183,12 +196,12 @@
 			        			<h4>Filter by date</h4>
 			        		</div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="firm.in" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="firm.in" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="firm.in" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="firm.in" min="2015-01-01" required>
 					        </div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="firm.out" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="firm.out" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="firm.out" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="firm.out" min="2015-01-01" required>
 					        </div>
 					        <div class="col-md-12 col-sm-10 col-xs-10">
 					        	<p> </p>
@@ -241,12 +254,12 @@
 			        			<h4>Filter by date</h4>
 			        		</div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="trust.in" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="trust.in" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="in" ng-model="trust.in" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="in" ng-model="trust.in" required>
 					        </div>
 					        <div class="col-md-5 col-sm-5 col-xs-5">
-					            <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="trust.out" required>
-					            <!-- <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="trust.out" ng-model-options="{timezone:'-0500'}" min="2015-01-01"  required> -->
+					            <!-- <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="out" ng-model="trust.out" required> -->
+					            <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="out" ng-model="trust.out" required>
 					        </div>
 					        <div class="col-md-12 col-sm-10 col-xs-10">
 					        	<p> </p>
@@ -273,7 +286,7 @@
 			          </thead>
 			          <tbody>
 			            <tr ng-repeat="r in bytrust.data">
-			              <td>{{r.account}}</td>
+			              <td><!-- {{r.account}}  -->{{r.notes}}</td>
 			              <!-- <td>{{r.total}}</td> -->
 			              <td>{{r.amount|currency}}</td>
 			              <td> </td>

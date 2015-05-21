@@ -23,7 +23,8 @@ app.controller('LoginCtrl', function ($scope, $location, $http, auth, Data, toas
         .success(function(data) {
             //console.log(JSON.stringify(data));
             if(data.status==='success') {
-                toaster.pop(data.status, '', data.message, 5000, 'trustedHtml');
+                toaster.pop('success', '', 'Welcome back '+data.name, 2000, 'trustedHtml');
+                toaster.pop(data.status, '', data.message, 1000, 'trustedHtml');
 
                 $cookies.uID = data.uID;
                 $cookies.taxes = data.taxes;

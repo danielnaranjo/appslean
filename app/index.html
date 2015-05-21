@@ -35,6 +35,110 @@
 
       <div ng-view="" class="slide-animation"></div>
 
+      <script type="text/ng-template" id="views/login.html">
+        <div class="row hidden-xs">
+          <div class="col-md-12 line">
+            <div class="row">
+              <div class="col-md-11 col-sm-10">Account > Sign in</div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="center-form panel">
+                  <div class="panel-body">
+                    <h2 class="text-center">Log in</h2>
+                    <form name="loginUserForm" ng-submit="login()" method="post" >
+                      <div class="form-group has-feedback">
+                        <input class="form-control input-lg" type="email" name="email" ng-model="login.email" placeholder="E-mail" required autofocus>
+                        <span class="ion-at form-control-feedback"></span>
+                      </div>
+                      <div class="form-group has-feedback">
+                        <input class="form-control input-lg" type="password" name="password" ng-model="login.password" placeholder="Password" required>
+                        <span class="ion-key form-control-feedback"></span>
+                      </div>
+                      <button type="submit" data-ng-disabled="loginUserForm.$invalid" class="btn btn-lg btn-block btn-success" ng-click="login(email)">Log in</button>
+                      <br/>
+                      <p class="text-center">
+                        <small>Don't have an account yet?
+                        <a href="mailto:webapp@apps-lean.com?subject=Request new access&body=MSW Lawyers PLLC Access to web application.">Sign up</a>
+                        </small>
+                      </p>
+                    </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </script>
+
+      <script type="text/ng-template" id="views/signup.html">
+        <div class="row hidden-xs">
+          <div class="col-md-12 line">
+            <div class="row">
+              <div class="col-md-11 col-sm-10">Account > Sign up</div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="center-form panel">
+                  <div class="panel-body">
+                    <h2 class="text-center">Sign up</h2>
+                    <form name="signupForm" role="form">
+                        <div class="form-group">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" class="form-control input-lg" placeholder="Name" ng-model="signup.name" />
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" class="form-control input-lg" placeholder="Email" name="email" ng-model="signup.email" focus/>
+                                <span ng-show="signupForm.email.$error.email" class="help-inline">Email is not valid</span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="block input-icon input-icon-right">
+                                <input type="password" class="form-control input-lg" name = "password" placeholder="Password" ng-model="signup.password" required/>
+                                <small class="errorMessage" data-ng-show="signupForm.password.$dirty && signupForm.password.$invalid"> Enter Password.</small>
+                            </span>
+                        </div>
+                        <div class="form-group" ng-show="signup.password">
+                            <span class="block input-icon input-icon-right">
+                                <input type="password" class="form-control input-lg" name="password2" placeholder="Password Again" ng-model="signup.password2" password-match="signup.password" required/>
+                                <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required"> Enter password again.</small>
+                                <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.passwordNoMatch && !signupForm.password2.$error.required"> Password do not match.</small>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" class="form-control input-lg" placeholder="Phone" name="phone" ng-model="signup.phone"/>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <span class="block input-icon input-icon-right">
+                                <input type="text" class="form-control input-lg" placeholder="Address" ng-model="signup.address" />
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-block btn-success" ng-click="signUp(signup)" data-ng-disabled="signupForm.$invalid">
+                            Sign Up
+                        </button>
+                        <hr>
+                        <p class="text-center">
+                            <small>
+                                Already have an account? <a href="#/login">Sign In</a>
+                            </small>
+                        </p>
+                    </form>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </script>
+
       <div class="footer">
         <div class="container">
           <div class="row">
@@ -71,9 +175,6 @@
           </div>
         </div>
       </div>
-
-      <div id="version">v1 Beta by Daniel N.</div>
-
       <toaster-container toaster-options="{'time-out':1000}"></toaster-container>
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -147,5 +248,6 @@
         <!-- changelog -->
         <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
         <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+
 </body>
 </html>
