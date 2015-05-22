@@ -186,9 +186,14 @@
 			          </tfoot>
 			        </table> <!-- range -->
 				</tab><!-- single / specify report -->
+				<!-- <tab heading="Collects Report" ng-show="partner==1">
+					<h3>
+						Perfomance by Collects
+					</h3>
+				</tab> -->
 				<tab heading="Firm Report" ng-show="partner==1">
 			       	<h3>
-			       		Performance by attorney
+			       		Performance by Attorney
 		        	</h3>
 		        	<div class="row">
 		        		<form class="form" role="form" ng-submit="executeFirm()">
@@ -220,18 +225,42 @@
 			          		<td colspan="4">Performance {{bylawyers.from|date}} - {{bylawyers.to|date}}</td>
 			          	</tr>
 			            <tr style="font-weight:bold;">
-			              <td>Attorney</td>
-			              <td>Cases</td>
-			              <td>Amounts</td>
+			              <td>
+			              	<a href="javascript:;" ng-click="sortType='lastname';sortReverse=!sortReverse">
+			              		Attorney
+			              		<span ng-show="sortType=='lastname' && !sortReverse" class="fa fa-caret-down"></span>
+			              		<span ng-show="sortType=='lastname' && sortReverse" class="fa fa-caret-up"></span>
+			              	</a>
+			              </td>
+			              <td>
+			              	<a href="javascript:;" ng-click="sortType='total';sortReverse=!sortReverse">
+			              		Cases
+			              		<span ng-show="sortType=='total' && !sortReverse" class="fa fa-caret-down"></span>
+			              		<span ng-show="sortType=='total' && sortReverse" class="fa fa-caret-up"></span>
+			              	</a>
+			              </td>
+			              <td>
+			              	<a href="javascript:;" ng-click="sortType='amount';sortReverse=!sortReverse">
+			              		Amounts
+			              		<span ng-show="sortType=='amount' && !sortReverse" class="fa fa-caret-down"></span>
+			              		<span ng-show="sortType=='amount' && sortReverse" class="fa fa-caret-up"></span>
+			              	</a>
+			              </td>
 			              <td> </td>
 			            </tr>
 			          </thead>
 			          <tbody>
-			            <tr ng-repeat="r in bylawyers.data">
+			            <tr ng-repeat="r in bylawyers.data | orderBy:sortType:sortReverse">
 			              <td>{{r.lastname}}</td>
 			              <td>{{r.total}}</td>
 			              <td>{{r.amount|currency}}</td>
 			              <td> </td>
+			            </tr>
+			            <tr ng-show="bylawyers.data==0">
+			            	<td colspan="4">
+			            		<h3>No data available.</h3> 
+			            		<p>Try again another date range.</p>
+			            	</td>
 			            </tr>
 			          </tbody>
 			          <tfoot ng-show="bylawyers.data!=0">
@@ -278,18 +307,36 @@
 			          		<td colspan="4">Performance {{bytrust.from|date}} - {{bytrust.to|date}}</td>
 			          	</tr>
 			            <tr style="font-weight:bold;">
-			              <td>Account</td>
+			              <td>
+			              	<a href="javascript:;" ng-click="sortType='notes';sortReverse=!sortReverse">
+			              		Account
+			              		<span ng-show="sortType=='notes' && !sortReverse" class="fa fa-caret-down"></span>
+			              		<span ng-show="sortType=='notes' && sortReverse" class="fa fa-caret-up"></span>
+			              	</a>
+			              </td>
 			              <!-- <td>Cases</td> -->
-			              <td>Balance</td>
+			              <td>
+			              	<a href="javascript:;" ng-click="sortType='amount';sortReverse=!sortReverse">
+			              		Balance
+			              		<span ng-show="sortType=='amount' && !sortReverse" class="fa fa-caret-down"></span>
+			              		<span ng-show="sortType=='amount' && sortReverse" class="fa fa-caret-up"></span>
+			              	</a>
+			              </td>
 			              <td> </td>
 			            </tr>
 			          </thead>
 			          <tbody>
-			            <tr ng-repeat="r in bytrust.data">
+			            <tr ng-repeat="r in bytrust.data | orderBy:sortType:sortReverse">
 			              <td><!-- {{r.account}}  -->{{r.notes}}</td>
 			              <!-- <td>{{r.total}}</td> -->
 			              <td>{{r.amount|currency}}</td>
 			              <td> </td>
+			            </tr>
+			            <tr ng-show="bytrust.data==0">
+			            	<td colspan="4">
+			            		<h3>No data available.</h3> 
+			            		<p>Try again another date range.</p>
+			            	</td>
 			            </tr>
 			          </tbody>
 			          <tfoot ng-show="bytrust.data!=0">

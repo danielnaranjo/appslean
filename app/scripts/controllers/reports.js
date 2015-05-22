@@ -14,6 +14,10 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     $scope.taxes = $cookies.taxes;
 	$scope.partner = $cookies.partner;
 	$scope.type = $cookies.type;
+
+    // $scope.sortType     = 'notes'; // set the default sort type
+    $scope.sortReverse  = false;  // set the default sort order
+
     var URL="";
     // Get data with or without Lawyer's ID
     if($cookies.partner==0) {
