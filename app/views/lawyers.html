@@ -22,7 +22,7 @@
 	                <td><strong>Name</strong></td>
 	                <td class="hidden-xs"><strong>E-mail</strong></td>
 	                <td><strong>Type of compensation</strong></td>
-	                <td><strong>Last comp.</strong></td>
+	                <td><!-- <strong>Last comp.</strong> --></td>
 	                <td> </td>
 	              </tr>
 	            </thead>
@@ -31,9 +31,9 @@
 	                <td class="capitalize"><a href="javascript:;" ng-click="open({{d.uid}})">{{d.name}} {{d.middle}} {{d.lastname}}</a></td>
 	                <td class="hidden-xs"><a href="mailto:{{d.email}}">{{d.email}}</a></td>
 	                <td>{{d.type}}</td>
-	                <td>{{'2015-04-01'|date}}</td>
+	                <td><!-- {{'2015-04-01'|date}} --></td>
 	                <td><!-- <a href="javascript:;" ng-click="open()">Report</a> -->
-	                	<a ng-href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a>
+	                	<!-- <a ng-href="#/report/{{d.uid}}"><i class="glyphicon glyphicon-search"></i></a> -->
 	                </td>
 	              </tr>
 	              <tr ng-hide="lawyers.data">
