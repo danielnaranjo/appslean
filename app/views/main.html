@@ -1,8 +1,10 @@
 <div class="row hidden-xs">
   <div class="col-md-12 line">
     <div class="row">
-      <div class="col-md-11 col-sm-10">Account > Dasboard</div>
-      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-href="#/logout" class="logout">Logout</a></div>
+      <div class="col-md-9 col-sm-9">Account > Dasboard</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+        <profile><profile>
+      </div>
     </div>
   </div>
 </div>
@@ -12,7 +14,7 @@
       <menu></menu>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
-      <div class="row" style="margin:2px 2px 0 0;" ng-show="partner==0"> <!-- ng-init="push=false" -->
+      <div class="row" style="margin:2px 2px 0 0;"> <!--  ng-show="partner==0" -->
         <div class="col-md-12">
           <div class="alert alert-warning" role="alert" ng-hide="notification.data==0 || push==true">
               <h5>You deposit ready to split!
@@ -32,7 +34,7 @@
       </div>
 
       <!-- notification -->
-      <div class="row" ng-show="push && partner==0">
+      <div class="row" ng-show="push"><!--  && partner==0 -->
         <div class="col-md-12">
           <table class="table table-striped table-hover alert alert-warning">
             <thead>
@@ -67,7 +69,7 @@
           <table class="table table-striped table-hover">
             <thead>
               <tr>
-                <td ng-show="partner==1"><strong>Attorney</strong></td>
+                <!-- <td ng-show="partner==1"><strong>Attorney</strong></td> -->
                 <td><strong>Company/Name</strong></td>
                 <td class="hidden-xs"><strong>File #</strong></td>
                 <!-- <td class="hidden-xs"><strong>Payment</strong></td> -->
@@ -78,7 +80,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="d in reports.data | limitTo:5">
-                <td ng-show="partner==1">{{d.attorney}}</td>
+                <!-- <td ng-show="partner==1">{{d.attorney}}</td> -->
                 <td>{{d.nameclient}}<span class="visible-xs"><br># {{d.filenumber}}</span></td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
                 <!-- <td class="hidden-xs">{{d.payment}}</td> -->
@@ -94,7 +96,7 @@
                 <td colspan="5"><h3>Loading data..</h3></td>
               </tr>
               <tr ng-show="reports.data==0">
-                <td colspan="5"><h3>No data</h3></td>
+                <td colspan="5"><h3>No splits to display</h3></td>
               </tr>
             </tbody>
           </table>

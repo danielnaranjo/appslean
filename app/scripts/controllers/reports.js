@@ -18,21 +18,21 @@ app.controller('ReportsCtrl', function ($scope, Data, $http, auth, $cookies, toa
     // $scope.sortType     = 'notes'; // set the default sort type
     $scope.sortReverse  = false;  // set the default sort order
 
-    var URL="";
-    // Get data with or without Lawyer's ID
-    if($cookies.partner==0) {
-        URL = 'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID;
-        console.log('NETK');
-    } else {
-        URL = 'http://apps-lean.com/api/v1/allsplits';
-        console.log('EM');
-    }
+    // var URL="";
+    // // Get data with or without Lawyer's ID
+    // if($cookies.partner==0) {
+    //     URL = 'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID;
+    //     console.log('NETK');
+    // } else {
+    //     URL = 'http://apps-lean.com/api/v1/allsplits';
+    //     console.log('EM');
+    // }
   
     var d = new Date();
     var n = d.getTime();
     $http({
         method:'GET',
-        url: URL //'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID
+        url: 'http://apps-lean.com/api/v1/lawyer/splitbylawyer/'+$cookies.uID
     })
     .success(function(data){
         $scope.reports=data;

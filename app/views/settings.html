@@ -1,8 +1,10 @@
 <div class="row hidden-xs">
   <div class="col-md-12 line">
     <div class="row">
-      <div class="col-md-11 col-sm-10">Account > Settings > Profile</div>
-      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-href="#/logout" class="logout">Logout</a></div>
+      <div class="col-md-9 col-sm-9">Account > Settings > Profile</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+        <profile><profile>
+      </div>
     </div>
   </div>
 </div>
@@ -13,7 +15,7 @@
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12">
       <div class="row">
-      	<div class="col-md-6">
+      	<div class="col-md-6" ng-show="attorney.data">
           <h3 ng-hide="attorney.data">Loading...</h3>
       		<form class="form" role="form" ng-submit="updateProfile()" ng-repeat="a in attorney.data" ng-show="attorney.data">
       			<h3>Personal Information</h3>

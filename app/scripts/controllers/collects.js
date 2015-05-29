@@ -64,7 +64,20 @@ app.controller('CollectsCtrl', function ($scope, $http, Data, toaster, $cookies,
         });
 	};
 
-// 
+  $scope.erase = function(cID) {
+    $http({ 
+      method: 'GET',
+      url: 'http://apps-lean.com/api/v1/collects/delete/'+cID
+    })
+    .success(function(data){
+      toaster.pop(data.status, '', data.message, 10000, 'trustedHtml');
+      $scope.getCollects();
+    })
+    .error(function(){
+      toaster.pop('error', '', 'Error: Cant complete this action', 10000, 'trustedHtml');
+      console.log('Error API collects/delete');
+    });
+  };
 
 //
   });

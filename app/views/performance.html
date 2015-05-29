@@ -1,8 +1,10 @@
 <div class="row hidden-xs">
   <div class="col-md-12 line">
     <div class="row">
-      <div class="col-md-11 col-sm-10">Account > Collect</div>
-      <div class="col-md-1 col-sm-2 col-xs-12"><a ng-href="#/logout" class="logout">Logout</a></div>
+      <div class="col-md-9 col-sm-9">Account > Collect</div>
+      <div class="col-md-3 col-sm-3 col-xs-12">
+      	<profile><profile>
+      </div>
     </div>
   </div>
 </div>
@@ -60,9 +62,9 @@
 					</div>
 			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 1 -->
 			     		<hr>
-			     		<label>Lawyers / attorney splits</label>
+			     		<label>Referral Attorney</label>
 			     		<select class="form-control" name="lawyer1" ng-model="transfer.lawyer1">
-		                    <option value="">Primary Attorney</option>
+		                    <option value="">Attorney list</option>
 		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
 		                      {{d.name}} {{d.lastname}}
 		                    </option>
@@ -71,7 +73,7 @@
 			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 2 -->
 			     		<label>Lawyers / attorney splits</label>
 			     		<select class="form-control" name="lawyer2" ng-model="transfer.lawyer2">
-		                    <option value="">Second Attorney</option>
+		                    <option value="">Attorney list</option>
 		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
 		                      {{d.name}} {{d.lastname}}
 		                    </option>
@@ -80,7 +82,7 @@
 			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 3 -->
 			     		<label>Lawyers / attorney splits</label>
 			     		<select class="form-control" name="lawyer3" ng-model="transfer.lawyer3">
-		                    <option value="">Third Attorney</option>
+		                    <option value="">Attorney list</option>
 		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
 		                      {{d.name}} {{d.lastname}}
 		                    </option>
@@ -88,12 +90,17 @@
 			     	</div>
 			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 4 -->
 			     		<label>Lawyers / attorney splits</label>
-			     		<select class="form-control" name="lawyer4" ng-model="transfer.lawyer4">
-		                    <option value="">Fourth Attorney</option>
-		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
+			     		<select class="form-control" name="lawyer4" ng-model="transfer.lawyer4" ng-hide="itshourly">
+		                    <option value="">Attorney list</option>
+		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-hide="d.uid==57">
 		                      {{d.name}} {{d.lastname}}
 		                    </option>
 		                  </select>
+		                  <!-- <input type="checkbox" ng-model="transfer.itshourly" name="itshourly"> If this a Referral or Working Hourly Lawyer?
+		                  <span ng-show="transfer.itshourly">
+		                  	<label>Enter amount $</label>
+		                  	<input type="text" name="hourly" value="hourly" ng-model="transfer.hourly" placeholder="25" class="form-control">
+		              	  </span> -->
 			     	</div>
 			     	<div class="form-group" ng-show="transfer.addcommet">
 			     		<hr>
