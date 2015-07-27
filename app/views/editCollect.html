@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <h3 class="modal-title">Preview or Modify Collect</h3>
+</div>
+<div class="modal-body" ng-controller="EditinPlaceCtrl">
+
+<form editable-form name="editableForm" onaftersave="saveUser()">
+    <div class="form-group">
+      <!-- editable username (text with validation) -->
+      <span class="title">User name: {{items}}</span>
+      <span editable-text="user.name" e-name="name" onbeforesave="checkName($data)" e-required>{{ user.name || 'empty' }}</span>
+    </div> 
+
+    <div class="form-group">
+      <!-- editable status (select-local) -->
+      <span class="title">Status: </span>
+      <span editable-select="user.status" e-name="status" e-ng-options="s.value as s.text for s in statuses">
+        {{ (statuses | filter:{value: user.status})[0].text || 'Not set' }}
+      </span>
+    </div>  
+
+    <div class="form-group">
+      <!-- editable group (select-remote) -->
+      <span class="title">Group: </span>
+      <span editable-select="user.group" e-name="group" onshow="loadGroups()" e-ng-options="g.uid as g.lastname for g in lawyers.data">
+        {{ showGroup() }}
+      </span>
+    </div>
+
+    <div>
+      <!-- button to show form -->
+      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+        Edit
+      </button>
+      <!-- buttons to submit / cancel form -->
+      <span ng-show="editableForm.$visible">
+        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+          Save
+        </button>
+        <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+          Cancel
+        </button>
+      </span>
+    </div>
+  </form> 
+
+</div>
+<div class="modal-footer">
+  <!-- <button class="btn btn-primary" ng-click="ok()">Close</button> -->
+  <button class="btn btn-primary" ng-click="cancel()">Close</button>
+</div>

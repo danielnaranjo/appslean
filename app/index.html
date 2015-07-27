@@ -27,9 +27,10 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-      <div class="header">
+      <div class="header" style="padding-bottom:10px;">
         <div class="container">
           <img src="images/logo.png" alt="logo" class="img-responsive logo">
+          <small>in partnership with Caja Holdings</small>
         </div>
       </div>
 
@@ -61,7 +62,7 @@
                       <button type="submit" data-ng-disabled="loginUserForm.$invalid" class="btn btn-lg btn-block btn-success" ng-click="login(email)">Log in</button>
                       <br/>
                       <p class="text-center">
-                        <small>Don't have an account yet?
+                        <small>Are you member?
                         <a href="mailto:webapp@apps-lean.com?subject=Request new access&body=MSW Lawyers PLLC Access to web application.">Sign up</a>
                         </small>
                       </p>
@@ -238,7 +239,6 @@
         <script src="scripts/ng-google-chart.js"></script>
         <script src="scripts/filters/tel.js"></script>
         <script src="scripts/services/auth.js"></script>
-        <script src="scripts/controllers/private.js"></script>
         <script src="scripts/services/exchange.js"></script>
         <script src="scripts/controllers/performance.js"></script>
         <script src="scripts/filters/sumbykey.js"></script>
@@ -246,11 +246,8 @@
         <script src="scripts/directives/profile.js"></script>
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/directives/ngconfirmclick.js"></script>
+        <script src="scripts/filters/expenses.js"></script>
         <!-- endbuild -->
-
-        <!-- changelog -->
-        <script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
-        <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
 
 </body>
 </html>

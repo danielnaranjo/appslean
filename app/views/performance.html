@@ -20,9 +20,8 @@
     			<h3>Attorney split report</h3>
 	     		<form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
 	     			<input type="hidden" name="cID" ng-model="transfer.cID">
-	     			<input type="hidden" name="lawyer" ng-model="transfer.lawyer">
-	     			<input type="hidden" name="amount" ng-model="transfer.amount">
 	     			<input type="hidden" name="trusts" ng-model="transfer.trusts">
+	     			<input type="hidden" name="lawyer" ng-model="transfer.lawyer">
 	     			<h3 ng-hide="transfer.nameclient">Loading Case...</h3>
 	     			<div class="form-group" ng-show="transfer.nameclient">
 	     				<label>Company or person name / File number</label>
@@ -32,6 +31,10 @@
 	     				<label>File number</label>
 	     			 	<input type="text" class="form-control" ng-model="transfer.filenumber" ng-value="transfer.filenumber" readonly>
 					</div>
+					<div class="form-group" ng-show="transfer.amount">
+	     				<label>Amount</label>
+	     				<input type="text" name="amount" ng-model="transfer.amount" class="form-control" readonly>
+	     			</div>
 					<hr>
 					<div class="form-group">
 						<label>
@@ -49,7 +52,7 @@
 			     	</div>
 			     	<div class="form-group" ng-show="transfer.exist==1">
 			     		<label>Expenses amount</label>
-			     		<input type="text" name="fees" ng-model="transfer.fees" class="form-control">
+			     		<input type="text" name="fees" ng-model="transfer.fees" class="form-control" ng-change="calculate()">
 			     		<small>(separate by commas in order)</small>
 			     	</div>
 			     	<hr ng-show="transfer.splits==1" >
@@ -57,55 +60,132 @@
 						<label>
 			     			<input type="checkbox" ng-model="transfer.splits">
 							<span ng-hide="transfer.splits==1">Did you work with other lawyer in the case?</span>
-							<span ng-show="transfer.splits">Remove other lawyer</span>
+							<span ng-show="transfer.splits">Remove others lawyers</span>
 						</label>
 					</div>
-			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 1 -->
-			     		<hr>
-			     		<label>Referral Attorney</label>
-			     		<select class="form-control" name="lawyer1" ng-model="transfer.lawyer1">
-		                    <option value="">Attorney list</option>
-		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-		                      {{d.name}} {{d.lastname}}
-		                    </option>
-		                  </select>
-			     	</div>
-			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 2 -->
-			     		<label>Lawyers / attorney splits</label>
-			     		<select class="form-control" name="lawyer2" ng-model="transfer.lawyer2">
-		                    <option value="">Attorney list</option>
-		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-		                      {{d.name}} {{d.lastname}}
-		                    </option>
-		                  </select>
-			     	</div>
-			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 3 -->
-			     		<label>Lawyers / attorney splits</label>
-			     		<select class="form-control" name="lawyer3" ng-model="transfer.lawyer3">
-		                    <option value="">Attorney list</option>
-		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-		                      {{d.name}} {{d.lastname}}
-		                    </option>
-		                  </select>
-			     	</div>
-			     	<div class="form-group" ng-show="transfer.splits"> <!-- abogado 4 -->
-			     		<label>Lawyers / attorney splits</label>
-			     		<select class="form-control" name="lawyer4" ng-model="transfer.lawyer4" ng-hide="itshourly">
-		                    <option value="">Attorney list</option>
-		                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-hide="d.uid==57">
-		                      {{d.name}} {{d.lastname}}
-		                    </option>
-		                  </select>
-		                  <!-- <input type="checkbox" ng-model="transfer.itshourly" name="itshourly"> If this a Referral or Working Hourly Lawyer?
-		                  <span ng-show="transfer.itshourly">
-		                  	<label>Enter amount $</label>
-		                  	<input type="text" name="hourly" value="hourly" ng-model="transfer.hourly" placeholder="25" class="form-control">
-		              	  </span> -->
-			     	</div>
+					<div class="row" ng-show="transfer.splits">
+						<hr>
+						<div class="col-md-6"> <!-- abogado 1 -->
+				     		<label>Referral Attorney</label>
+				     		<select class="form-control" name="referral" ng-model="transfer.referral" ng-change="calculate()">
+			                    <option value="">-Referral Attorney-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID!=6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+			                  </select>
+				     	</div>
+				     	<div class="col-md-6"> <!-- abogado 2 -->
+				     		<label><em>Para-legal</em> or associate staff</label>
+				     		<select class="form-control" name="staff" ng-model="transfer.staff" ng-change="calculate()">
+			                    <option value="">-Associate staff-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID==6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+			                  </select>
+				     	</div>
+					</div>
+			     	<hr>
+			     	<!--  (<a href="javascript:;" ng-click="add()">Add more attorney</a>) -->
+			     	<div class="row" ng-show="transfer.splits"> <!-- -->
+			     		<!-- <div class="col-md-8"> -->
+			     		<div ng-class="{'col-md-12' : !transfer.itshourly1, 'col-md-8' : transfer.itshourly1}" class="col-md-12">
+			     			<label>Lawyers / attorney splits</label>
+			     			<select class="form-control" name="lawyer1" ng-model="transfer.lawyer1">
+			                    <option value="">-Attorney list-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID!=6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+		                  	</select>
+		                  	<span ng-hide="transfer.itshourly1">
+		                  		<input type="checkbox" ng-model="transfer.itshourly1" name=""> Working Hourly Lawyer?
+		                  	</span>
+			     		</div>
+			     		<div class="col-md-4">
+			     			<span ng-show="transfer.itshourly1">
+								<label>Enter amount per hour ($) <a href="javascript:;" ng-click="transfer.itshourly1=false;transfer.hourly1=0;calculate();"><i class="fa fa-close"></i></a></label>
+								<input type="text" name="hourly1" value="hourly" ng-model="transfer.hourly1" placeholder="ex. 25" class="form-control" ng-change="calculate()">
+							</span>
+			     		</div>
+
+			     		<div ng-class="{'col-md-12' : !transfer.itshourly2, 'col-md-8' : transfer.itshourly2}" class="col-md-12">
+			     			<label>Lawyers / attorney splits</label>
+			     			<select class="form-control" name="lawyer2" ng-model="transfer.lawyer2">
+			                    <option value="">-Attorney list-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID!=6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+		                  	</select>
+		                  	<span ng-hide="transfer.itshourly2">
+		                  		<input type="checkbox" ng-model="transfer.itshourly2" name=""> Working Hourly Lawyer?
+		                  	</span>
+			     		</div>
+			     		<div class="col-md-4">
+			     			<span ng-show="transfer.itshourly2">
+								<label>Enter amount per hour ($) <a href="javascript:;" ng-click="transfer.itshourly2=false;transfer.hourly2=0;calculate();"><i class="fa fa-close"></i></a></label>
+								<input type="text" name="hourly2" value="hourly" ng-model="transfer.hourly2" placeholder="ex. 25" class="form-control" ng-change="calculate()">
+							</span>
+			     		</div>
+
+			     		<div ng-class="{'col-md-12' : !transfer.itshourly3, 'col-md-8' : transfer.itshourly3}" class="col-md-12">
+			     			<label>Lawyers / attorney splits</label>
+			     			<select class="form-control" name="lawyer3" ng-model="transfer.lawyer3">
+			                    <option value="">-Attorney list-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID!=6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+		                  	</select>
+		                  	<span ng-hide="transfer.itshourly3">
+		                  		<input type="checkbox" ng-model="transfer.itshourly3" name=""> Working Hourly Lawyer?
+		                  	</span>
+			     		</div>
+			     		<div class="col-md-4">
+			     			<span ng-show="transfer.itshourly3">
+								<label>Enter amount per hour ($) <a href="javascript:;" ng-click="transfer.itshourly3=false;transfer.hourly3=0;calculate();"><i class="fa fa-close"></i></a></label>
+								<input type="text" name="hourly3" value="hourly" ng-model="transfer.hourly3" placeholder="ex. 25" class="form-control" ng-change="calculate()">
+							</span>
+			     		</div>
+
+			     		<div ng-class="{'col-md-12' : !transfer.itshourly4, 'col-md-8' : transfer.itshourly4}" class="col-md-12">
+			     			<label>Lawyers / attorney splits</label>
+			     			<select class="form-control" name="lawyer4" ng-model="transfer.lawyer4">
+			                    <option value="">-Attorney list-</option>
+			                    <option value="{{d.uid}}" ng-repeat="d in lawyers.data" ng-show="d.uid!=57 && d.tID!=6">
+			                      {{d.name}} {{d.lastname}}
+			                    </option>
+		                  	</select>
+		                  	<span ng-hide="transfer.itshourly4">
+		                  		<input type="checkbox" ng-model="transfer.itshourly4" name=""> Working Hourly Lawyer?
+		                  	</span>
+			     		</div>
+			     		<div class="col-md-4">
+			     			<span ng-show="transfer.itshourly4">
+								<label>Enter amount per hour ($) <a href="javascript:;" ng-click="transfer.itshourly4=false;transfer.hourly4=0;calculate();"><i class="fa fa-close"></i></a></label>
+								<input type="text" name="hourly1" value="hourly" ng-model="transfer.hourly4" placeholder="ex. 25" class="form-control" ng-change="calculate()">
+							</span>
+			     		</div>	     		
+			     	</div> <!-- main lawyer -->
+			     	
+
 			     	<div class="form-group" ng-show="transfer.addcommet">
-			     		<hr>
 			     		<textarea class="form-control" placeholder="Add Notes" name="comments" ng-model="transfer.comments" ng-show="transfer.addcommet"></textarea>
 			     	</div>
+
+
+			     	<div class="" ng-init="calculate()">
+			     		<h3>Current split invoice: {{transfer.amount|currency}}</h3>
+			     		<p>
+			     			<span ng-if="transfer.fees">Expenses: {{discount|currency}}<br/></span>
+			     			<span ng-if="transfer.referral">Referral: {{commision|currency}}<br/></span>
+			     			<span ng-show="transfer.staff">Paralegal: {{asists|currency}}<br/></span>
+			     			<span ng-show="law1">Lawyer 1: {{law1|currency}}<br/></span>
+			     			<span ng-show="law2">Lawyer 2: {{law2|currency}}<br/></span>
+			     			<span ng-show="law3">Lawyer 3: {{law3|currency}}<br/></span>
+			     			<span ng-show="law4">Lawyer 4: {{law4|currency}}<br/></span>
+			     			<h4>You'll received: {{toPay|currency}}</h4><!--  ng-show="toPay" -->
+			     		</p>
+			     	</div>
+
+
 			     	<p>
 			     		<br>
 		                <button type="submit" class="btn btn-success" ng-submit="transferSend()" ng-disabled="!transfer.filenumber">
@@ -121,143 +201,6 @@
 			    <!-- {{transfer}} -->
     		</div>
     	</div> <!-- new layout -->
-	  <div class="row"> <!--  style="display:none;" -->
-	    <div class="col-md-12">
-<!-- 	      <h3>Attorney split report</h3>
-	      <form class="form" role="form" style="padding:20px 20px 20px 0;" ng-submit="transferSend()">
-	      <table class="table">
-	        <thead>
-	          <tr>
-	            <td colspan="8">
-	              <label>Date</label>
-	              <input type="date" class="form-control" placeholder="MM/DD/YYYY" name="date" ng-model="transfer.date" required style="width:300px;">
-	            </td>
-	          </tr>
-	          <tr>
-	            <td colspan="8" ng-controller="LawyersCtrl">
-	              <label>Transfer Form</label>
-	              <select class="form-control" name="lawyer" ng-model="transfer.lawyer" required style="width:300px;">
-	                <option value="">Attorney</option>
-	                <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-	                  {{d.name}} {{d.lastname}}
-	                </option>
-	              </select>
-	            </td>
-	          </tr>
-	          <tr style="font-weight: bold">
-	            <td>Trust Acc.</td>
-	            <td>Client</td>
-	            <td>File #</td>
-	            <td>Amount</td>
-	            <td>Lawyer</td>
-	            <td>Expenses</td>
-	            <td>Cost</td>
-	            <td ng-show="transfer.addcommet">Comments</td>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <tr>
-	            <td>
-	              <select class="form-control" name="trusts" ng-model="transfer.trusts" required>
-	                <option value="">Accounts</option>
-	                <option value="{{a.sID}}" ng-repeat="a in trusts.data">{{a.notes}}</option>
-	              </select>
-	            </td>
-	            <td>
-	              <input type="text" class="form-control" placeholder="Company or Person Name" name="nameclient" ng-model="transfer.nameclient" required>
-	            </td>
-	            <td>
-	              <input type="text" class="form-control" placeholder="File #" name="filenumber" ng-model="transfer.filenumber" required>
-	            </td>
-	            <td>
-	              <input type="text" class="form-control" placeholder="ex. 1000" name="amount" ng-model="transfer.amount" required>
-	            </td>
-	            <td ng-show="transfer.payment==5">
-	              <input type="text" class="form-control" placeholder="Reference No." name="reference" ng-model="transfer.reference">
-	            </td>
-	            <td ng-controller="LawyersCtrl">
-	              <select class="form-control" name="split" ng-model="transfer.split" required>
-	                <option value="">Splits / Lawyers</option>
-	                <option value="{{d.uid}}" ng-repeat="d in lawyers.data">
-	                  {{d.name}} {{d.lastname|limitTo:1}}
-	                </option>
-	              </select>
-	            </td>
-	            <td>
-	              <textarea class="form-control" placeholder="ex. Court filling" name="expenses" ng-model="transfer.expenses"></textarea>
-	            </td>
-	            <td>
-	              <textarea class="form-control" placeholder="ex. 150" name="expense" ng-model="transfer.expense"></textarea>
-	            </td>
-	            <td ng-show="transfer.addcommet">
-	              <textarea class="form-control" placeholder="Notes" name="comments" ng-model="transfer.comments"></textarea>
-	            </td>
-	          </tr>
-	        </tbody>
-	        <tfoot>
-	          <tr>
-	            <td colspan="9">
-	              <p>
-	                <button type="submit" class="btn btn-success" ng-submit="transferSend()">
-	                  Add daily collect
-	                </button>
-	                <input type="checkbox" ng-model="transfer.addcommet"> 
-	                <span ng-hide="transfer.addcommet">Add</span><span ng-show="transfer.addcommet">Remove</span> comments
-	              </p>
-	            </td>
-	          </tr>
-	        </tfoot>
-	      </table>
-	      </form> -->
-
-<!-- 	      <h3>Attorney split report</h3>
-	         <table class="table table-hover table-condensed" style="margin-top:10px;">
-	          <thead>
-	            <tr style="font-weight: bold">
-	              <td style="width:110px">Trust Acc.</td>
-	              <td style="width:130px">Company or person name</td>
-	              <td style="width:120px">File #</td>
-	              <td>Amount</td>
-	              <td>Split fees</td>
-	              <td>Splits / Lawyers</td>
-	              <td>Expenses</td>
-	              <td>Amounts</td>
-	              <td style="width:140px">Comments</td>
-	            </tr>
-	          </thead>
-	          <tbody>
-	            <tr ng-repeat="s in splits.data | limitTo:5">
-	              <td>{{s.trusts}}</td>
-	              <td>{{s.nameclient}}</td>
-	              <td>{{s.filenumber}}</td>
-	              <td>{{s.amount|currency}}</td>
-	              <td style="border-left:5px solid #666">
-	                <li style="margin:0;padding:5px;list-style:none;">Not set</li>
-	              </td>
-	              <td>
-	                <li ng-show="s.split" ng-repeat="law in s.split track by $index" style="margin:0;padding:5px;list-style:none;">
-	                  {{law}}
-	                </li>
-	              </td>
-	              <td>
-	                <span ng-show="s.expenses>0" ng-repeat="e in s.expenses" style="margin-right:5px;padding:5px;background-color:#f00;">
-	                  {{e}}
-	                </span>
-	              </td>
-	              <td>
-	                <span ng-show="s.fees>0" ng-repeat="f in s.fees" style="margin-right:5px;padding:5px;">
-	                  {{f|currency}}
-	                </span>
-	              </td>
-	              <td>{{s.comments}}</td>
-	            </tr>
-	          </tbody>
-	        </table>
-	      <a href="#/collects">
-	        <button class="btn btn-success">Add attorney report</button>
-	      </a> -->
-	    </div>
-	  </div>
-</div>
+	</div>
   </div>
 </div>

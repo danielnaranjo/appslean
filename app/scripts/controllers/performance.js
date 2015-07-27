@@ -79,6 +79,8 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
     $scope.transfer.lawyer=data[0].lawyer;
     $scope.transfer.amount=data[0].amount;
     $scope.transfer.trusts=data[0].account;
+
+    $scope.toPay=data[0].amount;
   })
   .error(function(){
     console.log('Error API splits/collect');
@@ -104,5 +106,67 @@ app.controller('PerformanceCtrl', function ($scope, $http, Data, toaster, $cooki
       toaster.pop('error', '', 'Something wrong', 10000, 'trustedHtml');
     });
   };
+
+  $scope.items = [1,2];
+  // $scope.add = function () {
+  //   var newItemNo = newItemNo + 1;
+  //   $scope.items.push({
+  //     'name': 'lawyer'+ newItemNo,
+  //     'ng-model': 'lawyer'+ newItemNo,
+  //     'value': ""
+  //   });
+  //   console.log('clicked',newItemNo);
+  // };
+
+  $scope.calculate = function () {
+
+    $scope.amount = $scope.transfer.amount;
+    $scope.expenses = $scope.transfer.fees;
+
+    $scope.asists = 0;
+    $scope.toPay = 0;
+    $scope.commision = 0;
+
+    $scope.law1=0;
+    $scope.law2=0;
+    $scope.law3=0;
+    $scope.law4=0;
+
+    if($scope.toPay==NaN){
+      $scope.toPay=$scope.transfer.amount;
+    }
+    
+    if($scope.transfer.referral) {
+      $scope.commision = 25;
+    } 
+
+    if($scope.transfer.hourly1>0) {
+      $scope.law1 = $scope.transfer.hourly1;
+    }
+    if($scope.transfer.hourly2>0) {
+      $scope.law2 = $scope.transfer.hourly2;
+    }
+    if($scope.transfer.hourly3>0) {
+      $scope.law3 = $scope.transfer.hourly3;
+    }
+    if($scope.transfer.hourly4>0) {
+      $scope.law4 = $scope.transfer.hourly4;
+    }
+
+    // Expenses
+    $scope.fees = [];
+    $scope.fees = $scope.transfer.fees.split(',');
+    $scope.discount=0;
+    for(var i=0; i<$scope.fees.length; i++) {
+      $scope.discount += parseFloat($scope.fees[i]);
+    }
+    //console.log('discount', $scope.discount);
+
+
+    // total
+    $scope.toPay = $scope.amount - $scope.law1 - $scope.law2 - $scope.law3 - $scope.law4 - $scope.commision - $scope.discount;
+    //console.log('toPay',$scope.toPay);
+  };
+
 
 });

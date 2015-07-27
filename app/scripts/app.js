@@ -19,9 +19,9 @@ var app = angular.module('calculatorApp', [
     'stpa.morris',
     'toaster',
     'ui.bootstrap',
-    'firebase',
     'ngTagsInput',
     'angular-loading-bar',
+    'xeditable',
     // "angucomplete",
     'xeditable'
   ]);
@@ -59,11 +59,7 @@ app.config(function ($routeProvider) {
       .when('/report/:cid', {
         templateUrl: 'views/report.html',
         controller: 'ReportCtrl'
-      })
-      .when('/private', {
-        templateUrl: 'views/private.html',
-        controller: 'PrivateCtrl'
-      })
+      }) 
       .when('/performance/:id', {
         templateUrl: 'views/performance.html',
         controller: 'PerformanceCtrl'

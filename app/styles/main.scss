@@ -44,7 +44,7 @@ body {
 }
 
 .logo {
-  padding: 30px 0;
+  padding: 30px 0 10px 0;
 }
 
 /* Custom page footer */
@@ -447,4 +447,29 @@ tags-input .autocomplete .suggestion-item em {
   font: normal bold 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: black;
   background-color: white;
+}
+
+
+
+form[name="editableForm"] > div {
+  height: auto;
+  padding: 5px 0;
+}
+
+form[name="editableForm"] .title {
+  display: inline-block;
+  font-weight: bold;
+  padding-top: 5px;
+  vertical-align: top;
+  min-width: 90px;
+}
+
+form[name="editableForm"] .editable {
+  display: inline-block;
+  padding-top: 5px;
+  vertical-align: top;
+}
+
+form[name="editableForm"] select {
+  width: 120px;
 }

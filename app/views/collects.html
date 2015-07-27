@@ -126,7 +126,11 @@
             <tbody>
               <tr ng-repeat="d in deposits.data | limitTo:10">
                 <td class="capitalize">{{d.name}} {{d.lastname}}</td>
-                <td class="hidden-xs">{{d.nameclient}}</td>
+                <td class="hidden-xs">
+                  <a href="javascript:;" ng-click="editCollect({{d.uid}})">
+                    {{d.nameclient}}
+                  </a> 
+                </td>
                 <td class="hidden-xs">{{d.filenumber}}</td>
                 <td class="hidden-xs">{{d.date|date}}</td>
                 <td>{{d.amount|currency}}</td>
